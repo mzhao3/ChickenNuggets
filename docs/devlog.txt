@@ -2,3 +2,9 @@ Maggie Zhao, Bing Li, Kenny Li
 APCS2 pd01
 
 DEVLOG
+05/28/2018
+- Started on project proposal.
+
+05/29/2018
+- PDF was corrupted.
+- Recreated project proposal and expanded on certain ideas.
