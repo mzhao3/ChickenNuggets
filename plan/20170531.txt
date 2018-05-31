@@ -1,5 +1,10 @@
 Which jobs are most crucial?
-The most crucial job right now is to create a UML diagram so that we can flesh out our ideas. We are still debating whether we should do a java version first or just start with Processing, because we have very little experiences / resources with Processing so we are very prone to errors and dead-ends. But at the same time many tasks that we want to accomplish would be less meaningful if we did the text version. Also, the user experience in the text-based java version (entering keys) would be really different than the user experience in Processing (mouse clicked, drag and drop). So making the Java version wouldn’t really help with converting our code to Processing??? 
+The most crucial job right now is to create a UML diagram so that we can flesh out our ideas. We are still debating whether we
+should do a java version first or just start with Processing, because we have very little experiences / resources with 
+Processing so we are very prone to errors and dead-ends. But at the same time many tasks that we want to accomplish would be 
+less meaningful if we did the text version. Also, the user experience in the text-based java version (entering keys) would be 
+really different than the user experience in Processing (mouse clicked, drag and drop). So making the Java version wouldn’t 
+really help with converting our code to Processing??? 
 
 Which components constitute core functionality (vs non-essential)?
 Core functionality: have a functional game that responds to customer’s orders and serve customers based on their priority.
