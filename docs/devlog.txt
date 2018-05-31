@@ -1,10 +1,60 @@
+Team ChickenNuggets
 Maggie Zhao, Bing Li, Kenny Li
 APCS2 pd01
 
-DEVLOG
-05/28/2018
-- Started on project proposal.
+pd 1
+---------------------
+Project: 
+/////////// Zone of Reflection \\\\\\\\\\\
+------------------------------------------
+OBSTACLES OVERCOME
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-05/29/2018
-- PDF was corrupted.
-- Recreated project proposal and expanded on certain ideas.
+
+UNRESOLVED ISSUES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+COOL STUFF LEARNED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+MID-DEVELOPMENT DESIGN CHANGES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- discarding our proposal to implement Java first then processing. We are starting with Processing. This decision is made because majority of our group voted for this option and we all think this is the best choice to present our final products within the time constraints.
+
+
+LESSONS LEARNED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+ ______   ______   __   __   __       ______   _______     
+/_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
+\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__  
+ \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\ 
+  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/ 
+   \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \ 
+    \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
+==============================================================
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+2018-05-28
+--------------------------------------------------------------
+Kenny, Maggie, Bing: started on project proposal
+
+2018-05-29
+--------------------------------------------------------------
+Bing: fixed corrupted PDF file
+Everyone: recreated project proposal and expanded on certain ideas
+
+2018-05-30
+--------------------------------------------------------------
+Everyone: worked on UML diagram
+Bing: made the plan for May 31st
+
+2018-05-31
+--------------------------------------------------------------
+Everyone: continued working on UML diagram. Worked on flow.pdf
+Bing: updated DevLog
