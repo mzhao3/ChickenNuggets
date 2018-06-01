@@ -1,0 +1,31 @@
+Which jobs are most crucial?
+The most crucial job right now is to create a UML diagram so that we can flesh out our ideas. We are still debating whether we
+should do a java version first or just start with Processing, because we have very little experiences / resources with 
+Processing so we are very prone to errors and dead-ends. But at the same time many tasks that we want to accomplish would be 
+less meaningful if we did the text version. Also, the user experience in the text-based java version (entering keys) would be 
+really different than the user experience in Processing (mouse clicked, drag and drop). So making the Java version wouldn’t 
+really help with converting our code to Processing??? 
+
+Which components constitute core functionality (vs non-essential)?
+Core functionality: have a functional game that responds to customer’s orders and serve customers based on their priority.
+Non-essential: GUI? Processing?(open to discussion)	
+	
+Which components are prerequisites for others?
+Making sure all members understand the structure and the flow of the game is the prerequisite for everything else 
+
+Which tasks can be delegated, and which must be collaboratively tackled?
+Collaboratively tackled:
+    - Making the UML diagram and flow charts
+    - Deciding whether we should start with Processing or Java
+    - Making the driver class
+Delegated
+    - Completing chunks of the game (one is responsible for the store, the other is responsible for the customer, and the last person is responsible for the Food)
+
+What is the timeline, and how does it accommodate setbacks, course changes?
+5 / 30 / 2018: worked on the UML diagram, not completed
+5 / 31 / 2018: decide whether we are working on Processing or Java first; finish making UML; start on flow charts
+6 / 1 / 2018: finish flow charts
+6 / 2 / 2018 - 6 / 3 / 2018: complete the chunks 
+6 / 4 / 2018 - 6 / 5 / 2018: put the chunks together by testing them on the Driver
+6 / 6 / 2018: add in GUI if possible 
+6 / 7 / 2018 - onward: Not sure if we are doing presentation for the last few days. When is the deadline?
