@@ -4,13 +4,14 @@ class Customer implements Comparable<Customer>{
   Stack<Food> order;
   float tip, waitTime;
   boolean isLeaving;
-  int calorieRequirement, priority;
+  int priority;
   String comment;
   
   Customer(int test) {
     priority = test;
   }
 
+//-------------PQueue--Helper----------------
   boolean equals(Customer other) {
     return priority == other.priority;
   }
