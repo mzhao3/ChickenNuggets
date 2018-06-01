@@ -6,7 +6,7 @@
 ## APCS2 Final Project
 
 
-Proposal: (TBD)
+Proposal: [Our proposal](./docs/proposal.pdf)
 
 Explanation: (TBD)  
 
