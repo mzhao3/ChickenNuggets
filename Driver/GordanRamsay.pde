@@ -1,0 +1,2 @@
+class GordanRamsay /*extends Customer*/{
+}
