@@ -1,0 +1,63 @@
+ChickenNuggets
+Maggie Zhao, Bing Li, Kenny Li
+APCS2 pd01
+
+Plan for 06-04-2018
+
+Which jobs are most crucial?
+Now that we have decided on starting the project in Processing (instead of Java, because too much of the game functionality, like choosing food to cook, and serving it, is too different, and wouldn’t really be helpful to the development process), and the UML and flow diagrams have been created, the most crucial job right now is to ensure the basic functionality of the game. This includes the ability to click on objects to cook/serve them, the ability of the customer and the player to make orders, having the player earn money, and having  
+
+Which components constitute core functionality (vs non-essential)?
+Core functionality: 
+- have a functional game that responds to customer’s orders and serve customers based 
+	on their priority
+- have customers appear on the screen and show their orders
+- clicking and timing (explained more in depth later) 
+- tipping
+Non-essentials: aesthetics 
+	- trash can
+	- animation of customers arriving/leaving
+	- would like a start screen, which when clicked, would go to the actual game
+	- tutorial to teach player the game
+	- comments given by the customer
+	- different characteristics of special customers ( Gordon Ramsay, Julia 
+		Child, Guy Fieri, Bobby Flay, Martha Stewart, Rachel Ray, troll ) 
+	- having an animated countdown timer
+
+Which components are prerequisites for others?
+- priority of customers, where special customers are able to go in the front of the	
+	line
+- making sure different Java objects like food and kitchen equipment show up as 
+	distinct objects on the play screen
+- ability of customers to make orders, and for the player to be able to make the 
+	order and compare the two
+- clicking functionality ( selecting the customer to view their order // clicking on
+	food and stove to cook it // creating the final order and giving it to the 
+	customer )
+- timing functionality ( for cooking food // burning food // customers leaving if 
+	order takes too long )
+- tipping functionality ( so that the user can earn money to purchase upgrades )
+- that there is a distinct 
+	win condition ( earning a certain amount of money ) &
+	lose condition ( having too many customers leave the store )
+- clicking on store button brings player to a different store screen, and buttons for 
+	purchases works as intended
+
+Which tasks can be delegated, and which must be collaboratively tackled?
+Collaboratively tackled:
+	- making sure chunks work cohesively
+	- fixing bugs
+Delegated:
+    	- completing chunks of the game ( one is responsible for the store, the other is responsible for the customer, and the last person is responsible for the food )
+
+
+What is the timeline, and how does it accommodate setbacks, course changes?
+[x] 5 / 30 / 2018: worked on the UML diagram, not completed
+[x] 5 / 31 / 2018: decide whether we are working on Processing or Java first; finish 	making UML; start on flow charts
+[x] 6 / 1 / 2018: finish flow charts
+[] 6 / 2 / 2018 - 6 / 3 / 2018: complete the chunks 
+[] 6 / 4 / 2018 - 6 / 5 / 2018: put the chunks together by testing them on the 	
+	Driver
+[] 6 / 6 / 2018: add in GUI if possible 
+[] 6 / 7 / 2018: product testing and bug fixing.
+[] 6 / 8 / 2018: demos! :) 
