@@ -24,6 +24,7 @@ void trash() {
 
 void come() {
   //PriorityQueue is min heap
+  /*
   Customer temp = new Customer(1);
   Customer temp1 = new Customer(2);
   Customer temp2 = new Customer(1);
@@ -35,4 +36,5 @@ void come() {
   customerList.add(temp3);
   customerList.add(temp4);
   System.out.println(customerList);
+  */
 }
