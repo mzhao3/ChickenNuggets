@@ -57,4 +57,6 @@ Bing: made the plan for May 31st
 2018-05-31
 --------------------------------------------------------------
 Everyone: continued working on UML diagram. Worked on flow.pdf
+Kenny: created all the classes with their variables based on the UML 
+diagram. created helper methods for pQueue.
 Bing: updated DevLog
