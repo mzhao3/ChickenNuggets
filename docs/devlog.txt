@@ -60,3 +60,13 @@ Everyone: continued working on UML diagram. Worked on flow.pdf
 Kenny: created all the classes with their variables based on the UML 
 diagram. created helper methods for pQueue.
 Bing: updated DevLog
+
+2018-06-02
+--------------------------------------------------------------
+Maggie: updated plan for 2018-06-04
+
+2018-06-03
+--------------------------------------------------------------
+Kenny and Bing: updated DevLog
+Bing: implemented methods in Customers, Food and their subclasses
+
