@@ -1,7 +1,7 @@
-import java.util.Stack;
+import java.util.LinkedList;
 
 class Customer implements Comparable<Customer>{
-  Stack<Food> orderList = new Stack<Food>();
+  LinkedList<Food> orderList = new LinkedList<Food>();
   float tipRate, waitTime;
   boolean isLeaving;
   int priority;
@@ -39,7 +39,7 @@ class Customer implements Comparable<Customer>{
   
   void makeOrder(String newType, String newSize) {
     Food order = new Food(newType, newSize); 
-    orderList.push(order);
+    orderList.add(order);
   }
   
   ArrayList<String> getOrder() {

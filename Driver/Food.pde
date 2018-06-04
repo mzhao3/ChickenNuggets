@@ -1,9 +1,9 @@
+import java.util.Stack;
+
 class Food {
-  float cookTime;
   String type, size;
-  boolean isCooked, isBurned;
   float price;
-  ArrayList<String> ingredients = new ArrayList<String>(); 
+  Stack<String> foodItem = new Stack<String>(); 
 
   Food(String newType, String newSize) {
     type = newType;
@@ -11,34 +11,31 @@ class Food {
     isBurned = false;
     isCooked = false;
     if (type.equals("hamburgers")) {
-      ingredients.add("bread");
-      ingredients.add("beef");
-      ingredients.add("lettuce");
-      ingredients.add("tomato");
-      ingredients.add("cheese");
-      ingredients.add("bacon");
-      ingredients.add("bread");
+      foodItem.push("bread");
+      foodItem.push("beef");
+      foodItem.push("lettuce");
+      foodItem.push("tomato");
+      foodItem.push("cheese");
+      foodItem.push("bacon");
+      foodItem.push("bread");
       price = 4.5;
-      cookTime = 15;
     }
     if(type.equals("chickenburger")) {
-      ingredients.add("bread");
-      ingredients.add("chicken");
-      ingredients.add("lettuce");
-      ingredients.add("tomato");
-      ingredients.add("cheese");
-      ingredients.add("bread");
+      foodItem.push("bread");
+      foodItem.push("chicken");
+      foodItem.push("lettuce");
+      foodItem.push("tomato");
+      foodItem.push("cheese");
+      foodItem.push("bread");
       price = 3.0;
-      cookTime = 10;
     }
     if(type.equals("grilledcheese")) {
-      ingredients.add("bread");
-      ingredients.add("cheese");
-      ingredients.add("cheese");
-      ingredients.add("cheese");
-      ingredients.add("bread");
+      foodItem.push("bread");
+      foodItem.push("cheese");
+      foodItem.push("cheese");
+      foodItem.push("cheese");
+      foodItem.push("bread");
       price = 4.0;
-      cookTime = 8;
     }
   }
   
