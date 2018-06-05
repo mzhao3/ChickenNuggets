@@ -1,22 +1,39 @@
-abstract class Ingredients {
-    boolean isCooked, isBurned;
-    double cookTime;
-    double xPos, yPos;
-    
-    //abstract void display(); will implement later because don't know where you guy want it
-    abstract void setCookTime(double newCookTime);
-    abstract double getCookTime();
-    
-    void setCooked() {
-      if (cookTime <= -50) {
-        isBurned = true;
-      } else if (cookTime <= 0) {
-        isCooked = true;
-      }
+class Ingredients {
+  boolean isCooked = false;
+  boolean isBurned = false;
+  double cookTime;
+  int xPos, yPos;
+  PImage img;
+  String type;
+
+  Ingredients (String name) {
+    type = name;
+  }
+
+  Ingredients(String name, int x, int y, PImage image) {
+    this(name);
+    xPos = x;
+    yPos = y;
+    img = image;
+  }
+
+  void display() {
+    image(img, xPos, yPos, 50, 50);
+  }
+
+  double getCookTime() {
+    return cookTime;
+  }
+
+  void setCooked() {
+    if (cookTime <= -50) {
+      isBurned = true;
+    } else if (cookTime <= 0) {
+      isCooked = true;
     }
-    
-    void reduceCookTime() {
-      cookTime -= 1;
-    }
-    
+  }
+
+  void reduceCookTime() {
+    cookTime -= 1;
+  }
 }

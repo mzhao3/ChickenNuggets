@@ -2,10 +2,11 @@ import java.util.LinkedList;
 
 class Customer implements Comparable<Customer>{
   LinkedList<Food> orderList = new LinkedList<Food>();
-  float tipRate, waitTime;
+  float tipRate, waitTime, xPos, yPos;
   boolean isLeaving;
   int priority;
   String comment;
+  PImage img;
   
   Customer() {
     priority = 2;
@@ -13,7 +14,16 @@ class Customer implements Comparable<Customer>{
     waitTime = 20;
     isLeaving = false;
     comment = "Thank you";
+    img = loadImage("image/customer.png");
+    xPos = 50;
   }
+  
+  Customer(float y) {
+    this();
+    yPos = y;
+  }
+  
+  
   
 //-------------PQueue--Helper----------------
   boolean equals(Customer other) {
@@ -59,4 +69,7 @@ class Customer implements Comparable<Customer>{
     return total * tipRate;
   }
   
+  void display() {
+    image(img, xPos, yPos, 50, 100);
+  }
 }
