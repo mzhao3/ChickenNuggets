@@ -1,11 +1,13 @@
 abstract class Ingredients {
     boolean isCooked, isBurned;
-    float cookTime;
-    float xPos, yPos;
+    double cookTime;
+    double xPos, yPos;
     
-    abstract void display();
+    //abstract void display(); will implement later because don't know where you guy want it
+    abstract void setCookTime(double newCookTime);
+    abstract double getCookTime();
     
-    boolean setCooked() {
+    void setCooked() {
       if (cookTime <= -50) {
         isBurned = true;
       } else if (cookTime <= 0) {
@@ -16,4 +18,5 @@ abstract class Ingredients {
     void reduceCookTime() {
       cookTime -= 1;
     }
+    
 }

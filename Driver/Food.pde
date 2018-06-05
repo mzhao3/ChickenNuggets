@@ -3,49 +3,53 @@ import java.util.Stack;
 class Food {
   String type, size;
   float price;
-  Stack<String> foodItem = new Stack<String>(); 
+  Stack<Ingredients> components = new Stack<Ingredients>(); 
 
   Food(String newType, String newSize) {
     type = newType;
     size = newSize;
-    isBurned = false;
-    isCooked = false;
+  
     if (type.equals("hamburgers")) {
-      foodItem.push("bread");
-      foodItem.push("beef");
-      foodItem.push("lettuce");
-      foodItem.push("tomato");
-      foodItem.push("cheese");
-      foodItem.push("bacon");
-      foodItem.push("bread");
+      components.push(new Bread());
+      components.push(new Beef());
+      components.push(new Lettuce());
+      components.push(new Tomato());
+      components.push(new Cheese());
+      components.push(new Bacon());
+      components.push(new Bread());
       price = 4.5;
     }
     if(type.equals("chickenburger")) {
-      foodItem.push("bread");
-      foodItem.push("chicken");
-      foodItem.push("lettuce");
-      foodItem.push("tomato");
-      foodItem.push("cheese");
-      foodItem.push("bread");
+      components.push(new Bread());
+      components.push(new Chicken());
+      components.push(new Lettuce());
+      components.push(new Tomato());
+      components.push(new Cheese());
+      components.push(new Bread());
       price = 3.0;
     }
     if(type.equals("grilledcheese")) {
-      foodItem.push("bread");
-      foodItem.push("cheese");
-      foodItem.push("cheese");
-      foodItem.push("cheese");
-      foodItem.push("bread");
+      components.push(new Bread());
+      components.push(new Cheese());
+      components.push(new Cheese());
+      components.push(new Cheese());
+      components.push(new Bread());
       price = 4.0;
+    }
+   
+    if(type.equals("salad")) {
+      components.push(new Cheese());
+      components.push(new Lettuce());
+      components.push(new Tomato());
+    }
+    if(type.equals("appleJuice")) {
+      components.push(new Apple());
+    }
+    if(type.equals("orangeJuice")) {
+      components.push(new Orange());
     }
   }
   
-  void setCookTime(float newCookTime) {
-    cookTime = newCookTime;
-  }
-  
-  double getCookTime() {
-    return cookTime;
-  }
   
   String getType() {
     return type;
