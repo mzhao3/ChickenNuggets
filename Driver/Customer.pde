@@ -2,11 +2,18 @@ import java.util.LinkedList;
 
 class Customer implements Comparable<Customer>{
   LinkedList<Food> orderList = new LinkedList<Food>();
-  float tipRate, waitTime, xPos, yPos;
+  float tipRate, waitTime;
   boolean isLeaving;
-  int priority;
+  int priority, xPos, yPos;
   String comment;
   PImage img;
+  //-----Food Items-----------
+  final int hamburger = 0;
+  final int chickenburger = 1;
+  final int grilledcheese = 2;
+  final int salad = 3;
+  final int appleJuice = 4;
+  final int orangeJuice = 5;
   
   Customer() {
     priority = 2;
@@ -18,7 +25,7 @@ class Customer implements Comparable<Customer>{
     xPos = 50;
   }
   
-  Customer(float y) {
+  Customer(int y) {
     this();
     yPos = y;
   }
@@ -39,16 +46,12 @@ class Customer implements Comparable<Customer>{
       return -1;
     }
   }
-  
-  String toString() {
-    return priority + "";
-  }
 
   
   //------------Customer's methods----------------
   
-  void makeOrder(String newType, String newSize) {
-    Food order = new Food(newType, newSize); 
+  void makeOrder(String newType) {
+    Food order = new Food(newType); 
     orderList.add(order);
   }
   

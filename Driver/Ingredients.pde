@@ -18,6 +18,9 @@ class Ingredients {
   }
 
   void display() {
+    noFill();
+    stroke(0);
+    rect(xPos, yPos, 50, 50);
     image(img, xPos, yPos, 50, 50);
   }
 

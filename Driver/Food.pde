@@ -1,14 +1,12 @@
 import java.util.Stack;
 
 class Food {
-  String type, size;
+  String type;
   float price;
   Stack<Ingredients> components = new Stack<Ingredients>(); 
 
-  Food(String newType, String newSize) {
+  Food(String newType) {
     type = newType;
-    size = newSize;
-
     if (type.equals("hamburgers")) {
       components.push(new Ingredients("bread"));
       components.push(new Ingredients("beef"));

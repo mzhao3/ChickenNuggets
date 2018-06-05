@@ -6,7 +6,7 @@ Stack<Food> makeOrder;
 Ingredients[][] ingredient;
 float totalTips;
 int numLeave;
-float yPos = 400;
+int yPos = 400;
 
 void setup() {
   rectMode(CORNER);
@@ -23,15 +23,9 @@ void draw() {
   rect(0, 0, 1500, 500);
   fill(255);
   rect(0, 500, 1500, 300); 
-  for (Ingredients[] row : ingredient) {
-    for (Ingredients i : row) {
-      i.display();
-    }
-  }
+  drawIngredients();
+  drawCustomers();
   come();
-  for (Customer c : customerList) {
-    c.display();
-  }
 }
 
 void populateIngredient() {
@@ -45,6 +39,20 @@ void populateIngredient() {
   ingredient[1][2] = new Ingredients("lettuce", 260, 640, loadImage("image/lettuce.png"));
   ingredient[1][3] = new Ingredients("apple", 380, 640, loadImage("image/apple.png"));
   ingredient[1][4] = new Ingredients("orange", 500, 640, loadImage("image/orange.png"));
+}
+
+void drawIngredients() {
+  for (Ingredients[] row : ingredient) {
+    for (Ingredients i : row) {
+      i.display();
+    }
+  }
+}
+
+void drawCustomers() {
+  for (Customer c : customerList) {
+    c.display();
+  }
 }
 
 void trash() {
