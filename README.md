@@ -36,14 +36,5 @@ Next to each piece of equipment, there is a button to upgrade, or buy another.
 - Buy- :heavy_dollar_sign: - buys a new piece of equipment (the limit being three of the type).
 - Upgrade- :arrow_up: - improves the equipment with a boost to speed of cooking, or increases the amount of tip received.
 
-### tldr; 
-* Customers are served with a priority queue- you have to serve the customers that come in first, but any “special” customers that come in will shove to the front of the line.
-* Must serve within time limit
-  * If completed the goal, you will get a tip from the customer
-  * If you fail to provide the service, you will lose money, and several other customers will leave the store as well. 
-  * If any food is burnt (or contains the wrong ingredient), you get a smaller amount of tips
-  * If you have enough tips, you can buy new equipments in the store that will make the cooking process more efficient.
-* Win condition: successfully served everything to certain number of customers (<10 who left) and gain $1000, game ends. Otherwise, keep going until the win condition is reached
-
 
 
