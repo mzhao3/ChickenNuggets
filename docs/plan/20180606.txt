@@ -4,6 +4,7 @@ APCS2 pd01
 
 Plan for 06-06-2018
 
+(Most of the components have been made, but still need to be linked together). 
 Which jobs are most crucial?
 The most crucial job right now is to ensure the basic functionality of the game. This includes the ability to click on objects to cook/serve them, the ability of the customer and the player to make orders, and having the player earn money.
 
