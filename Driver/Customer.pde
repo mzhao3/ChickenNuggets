@@ -1,19 +1,14 @@
 import java.util.LinkedList;
 
 class Customer implements Comparable<Customer>{
+  String[] menu = {"hamburger", "chickenburger", "grilledcheese", 
+  "salad", "orangeJuice", "appleJuice"};
   LinkedList<Food> orderList = new LinkedList<Food>();
   float tipRate, waitTime;
   boolean isLeaving;
   int priority, xPos, yPos;
   String comment;
   PImage img;
-  //-----Food Items-----------
-  final int hamburger = 0;
-  final int chickenburger = 1;
-  final int grilledcheese = 2;
-  final int salad = 3;
-  final int appleJuice = 4;
-  final int orangeJuice = 5;
   
   Customer() {
     priority = 2;
@@ -21,8 +16,9 @@ class Customer implements Comparable<Customer>{
     waitTime = 20;
     isLeaving = false;
     comment = "Thank you";
-    img = loadImage("image/customer.png");
+    img = loadImage("Image/customer.png");
     xPos = 50;
+    orderList = makeOrder((int)(Math.random() * 3));
   }
   
   Customer(int y) {
@@ -50,9 +46,11 @@ class Customer implements Comparable<Customer>{
   
   //------------Customer's methods----------------
   
-  void makeOrder(String newType) {
-    Food order = new Food(newType); 
-    orderList.add(order);
+  LinkedList<Food> makeOrder(int numItem) {
+    for (int x = numItem; x >= 0; x--) {
+      orderList.add(new Food(menu[(int)(Math.random() * menu.length)]));
+    }
+    return orderList;
   }
   
   ArrayList<String> getOrder() {
