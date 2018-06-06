@@ -4,7 +4,7 @@ class Food {
   String type;
   float price;
   Stack<Ingredients> components = new Stack<Ingredients>(); 
-
+// need to differentiate between cooked beef and raw beef 
   Food(String newType) {
     type = newType;
     if (type.equals("hamburgers")) {
