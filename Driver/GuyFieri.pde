@@ -1,9 +1,16 @@
 class GuyFieri extends Customer{
    GuyFieri() {
+    super();
+    img = loadImage("Image/Guy.png");
     priority = 1; //1
     waitTime = 15;
     tipRate = 0.2;
     isLeaving = false; 
+  }
+  
+  GuyFieri(float y) {
+    this();
+    yPos = y;
   }
   
   void advise() {

@@ -6,7 +6,7 @@ class Customer implements Comparable<Customer>{
   LinkedList<Food> orderList = new LinkedList<Food>();
   float tipRate, waitTime;
   boolean isLeaving;
-  int priority, xPos, yPos;
+  float priority, xPos, yPos;
   String comment;
   PImage img;
   
@@ -21,7 +21,7 @@ class Customer implements Comparable<Customer>{
     orderList = makeOrder((int)(Math.random() * 3));
   }
   
-  Customer(int y) {
+  Customer(float y) {
     this();
     yPos = y;
   }
@@ -61,6 +61,14 @@ class Customer implements Comparable<Customer>{
     return typeList;
   }
   
+  String printOrder() {
+    String types = "";
+    for(Food order: orderList) {
+      types = types + order.getType() + ", " ;    
+    }
+    return types;  
+  }
+  
   
   double setTips() {
     double total = 0;
@@ -73,4 +81,6 @@ class Customer implements Comparable<Customer>{
   void display() {
     image(img, xPos, yPos, 50, 100);
   }
+  
+ 
 }

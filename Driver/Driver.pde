@@ -53,9 +53,13 @@ void drawIngredients() {
 void drawCustomers() {
   for (Customer c : customerList) {
     c.display();
-    System.out.println(c.getOrder());
+    fill(0);
+    text(c.printOrder(), c.xPos + 50, c.yPos + 20); 
   }
-}
+    //System.out.println(c.getOrder());
+  }
+
+
 
 void trash() {
   makeOrder.pop();
@@ -64,8 +68,20 @@ void trash() {
 void come() {
   float randInt = (float)Math.random();
   //~11.6%
-  if (randInt <= .002) {
+  if (randInt <= .0025) {
     customerList.add(new Customer(yPos));
+    yPos -= 100;
+  }
+  if(randInt <= .0015) {
+    customerList.add(new GordanRamsay(yPos));
+    yPos -= 100;
+  }
+  if(randInt <= .001) {
+    customerList.add(new GuyFieri(yPos));
+    yPos -= 100;
+  }
+  if(randInt <= .0006) {
+    customerList.add(new Troll(yPos));
     yPos -= 100;
   }
 
@@ -94,5 +110,9 @@ void cook() {
   }
 }
 **/
+
+}
+
+void leave() { 
 
 }

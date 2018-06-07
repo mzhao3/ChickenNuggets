@@ -1,9 +1,16 @@
 class Troll extends Customer{
+
    Troll() {
-    priority = 2; //test = 1
+    super();
     waitTime = 15;  //shorter wait time
     tipRate = 0.1;  //less tip
+    img = loadImage("Image/troll.png");
     isLeaving = false; 
+  }
+  
+  Troll(float y) {
+    this();
+    yPos = y;
   }
   
   void skip() {
