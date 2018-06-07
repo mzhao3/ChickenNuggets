@@ -9,7 +9,7 @@ class GuyFieri extends Customer{
   }
   
   
-  void advise() {
+  String comment() {
      int random = (int)(Math.random() * 3);
     if (random == 0) {
       comment = "Food is not just eating energy. It's an experience"; 
@@ -18,6 +18,8 @@ class GuyFieri extends Customer{
     } else {
       comment = "Cooking is all about people. Food is maybe the only universal thing that really has the power to bring everyone together.";
     }
-  }
+  return comment;  
+}
+  
   
 }

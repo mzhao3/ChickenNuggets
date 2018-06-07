@@ -35,9 +35,13 @@ void draw() {
   drawIngredients();
   drawCustomers();
   drawStoves();
-  drawCursor();
+  
   drawJuicers();
+  drawTrash();
+  drawTray();
+  drawCursor();
   stoveCook();
+  juice();
   come();
 }
 
@@ -45,6 +49,10 @@ void mousePressed() {
   ingredientCheck(mouseX, mouseY);
   stoveCheck(mouseX, mouseY);
   juicerCheck(mouseX, mouseY);
+  customerCheck(mouseX, mouseY);
+  trash();
+  makeTray();
+  //cookedFoodCheck(mouseX, mouseY);
 }
 
 void ingredientCheck(float x, float y) {
@@ -79,13 +87,13 @@ void stoveCook() {
         int x = stove[r][c].xPos;
         int y = stove[r][c].yPos;        
         text(stove[r][c].makeFood() + "", x, y);
-        if (stove[r][c].currFood.cookTime <= 0) {
-          //stove[r][c].inUse = false;
-          //stove[r][c].currFood = null;
-        }
+        if (stove[r][c].currFood.cookTime <= -300) {   
+          stove[r][c].inUse = false;
+          //stove[r][c].currFood = null; 
+        }      
       }
     }
-  }
+  }  
 }
 
 void juice() { 
@@ -96,11 +104,11 @@ void juice() {
         int y = stove[r][c].yPos;
         text(juicer[r][c].makeFood()+"", x, y);
         if (juicer[r][c].currFood.cookTime <= 0) {
+        }
       }
     }
   }
 }
-
 
 void stoveCheck(float x, float y) {
   for (int r = 0; r < 2; r ++ ) {
@@ -112,7 +120,15 @@ void stoveCheck(float x, float y) {
           Ingredients storedFood = new Ingredients(temp.type, stove[r][c].xPos + 25, stove[r][c].yPos + 25, temp.img);
           stove[r][c].currFood = storedFood;
         }
+        cursorValue = 10;
         //used = stove[r][c];
+
+        if (cursorValue == 10 & stove[r][c].currFood.isCooked == true) {
+          Ingredients storedFood = null;
+          stove[r][c].currFood = null;
+        }
+
+      
       }
     }
   }
@@ -128,10 +144,19 @@ void juicerCheck(float x, float y) {
           Ingredients storedFood = new Ingredients(temp.type, juicer[r][c].xPos + 25, juicer[r][c].yPos + 25, temp.img);
           juicer[r][c].currFood = storedFood;
         }
+        cursorValue = 10;
       }
     }
   }
 }
+
+
+void customerCheck(float x, float y) { 
+  if (isWithin(x, 50, 100, y, 450, 550) ) {
+      customerList.peek().printOrder();
+  }
+}
+
 
 boolean isBetween(float currPos, float lower, float upper) {
   return currPos >= lower && currPos <= upper;
@@ -149,6 +174,7 @@ void drawCursor() {
     temp = getIngredient().img;
     image(temp, xPos - 15, yPos - 15, 50, 30);
   }
+  
 }
 
 Ingredients getIngredient() {
@@ -232,8 +258,27 @@ void drawStoves() {
   }
 }
 
+void drawTrash() { 
+  PImage img = loadImage("Image/trash.png");
+  image(img, 692, 514, 100, 100);
+}
+
+void drawTray() {
+  PImage img = loadImage("Image/tray.jpg");
+  image(img, 692, 628, 100, 100);
+}
+
 void trash() {
-  makeOrder.pop();
+  if (isWithin(mouseX, 692, 792, mouseY, 514, 614))
+      cursorValue = 10;
+    //makeOrder.pop();
+}
+
+void makeTray() {
+  if (isWithin(mouseX, 692, 792, mouseY, 628, 728) ) {
+    if (cursorValue < 10) 
+      getIngredient().display();
+  }
 }
 
 void come() {
@@ -255,38 +300,10 @@ void come() {
   }
 }
 
-// CLICKING!!
-
-// with kitchen equipment :) 
-
-/*void startCook() {
- if ( 0 <= cursorValue && cursorValue < 5 && used != null && used.inUse == false) {
- String ingredientName = "" + getIngredient().type;
- Ingredients toCook = new Ingredients(ingredientName, (int)used.xPos, (int)used.yPos, loadImage("Image/"+ingredientName+".png"));
- used.cook( toCook );
- image(toCook.img, toCook.xPos, toCook.yPos, 30, 30);
- text(toCook.cookTime + "", toCook.xPos + 50, toCook.yPos + 20);
- cursorValue = 10;
- used.inUse = true;
- used = null;
- }
- }
- 
- void startJuicing () {
- if (  cursorValue > 7 && usedJ != null && usedJ.inUse == false) {
- String ingredientName = "" + getIngredient().type;
- Ingredients toJuice = new Ingredients(ingredientName, (int)usedJ.xPos, (int)usedJ.yPos, loadImage("Image/"+ingredientName+".png"));
- usedJ.juice( toJuice );
- 
- image(toJuice.img, xPos, yPos, 30, 30);
- 
- cursorValue = 10;
- usedJ.inUse = true;
- usedJ = null;
- }
- }
- 
- */
-
 void leave() {
+  Customer c = customerList.peek();
+  if (c.waitTime < 0) {
+    text(c.comment(), c.xPos + 50, c.yPos + 20);
+    customerList.remove();
+  }
 }

@@ -4,15 +4,14 @@ class GordanRamsay extends Customer{
 
   GordanRamsay() {
     super();
-    priority = 1; ////higher priority than regular customers
-    waitTime = 10;  //less wait time than regular
+    priority = 1; //test = 1
+    waitTime = 10;
     tipRate = 0.15;
     img = loadImage("Image/Gordan.png");
     isLeaving = false; 
   }
   
-  //Once food is served Gordon Ramsay will leave a comment
-  void flame() {
+  String comment() {
     int random = (int)(Math.random() * 3);
     if (random == 0) {
       comment = "My gran could do better! and she is dead"; 
@@ -21,5 +20,6 @@ class GordanRamsay extends Customer{
     } else {
       comment = "For what I am about to eat, may the Lord make me truly not vomit.";
     }
+    return comment;
   }
 }

@@ -58,12 +58,22 @@ class Customer implements Comparable<Customer>{
   }
   
   String printOrder() {
+ 
     String types = "";
     for(Food order: orderList) {
       types = types + order.getType() + ", " ;    
     }
     return types;  
-  }
+   /**
+   int oxPos = 500;
+   int oyPos = 50;
+ for (Food order : orderList) {
+   for (String ingredient: order.ingredients ) {
+     image(loadImage("Image/" + ingredient + ".png"), oxPos, oyPos);
+   }
+ }
+  **/ 
+}
   
   
   double setTips() {
@@ -77,6 +87,11 @@ class Customer implements Comparable<Customer>{
   void display() {
     image(img, xPos, yPos, 50, 100);
   }
+
+  String comment () {
+    return comment;
+  }
+  
   
   void setPOrder(int newY) {
     yPos = newY;
