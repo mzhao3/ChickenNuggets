@@ -6,6 +6,7 @@ PriorityQueue<Customer> customerList;
 Stack<Food> makeOrder;
 Ingredients[][] ingredient;
 Stove[][] stove;
+Juicer[][] juicer;
 float totalTips, xPos, yPos;
 int cursorValue = 10;
 int numLeave;
@@ -19,7 +20,9 @@ void setup() {
   ingredient = new Ingredients[2][5];
   populateIngredient();
   stove = new Stove[2][2];
+  juicer = new Juicer[2][1];
   populateStove();
+  populateJuicer();
 }
 
 void draw() {
@@ -31,6 +34,7 @@ void draw() {
   drawCustomers();
   drawStoves();
   drawCursor();
+  drawJuicers();
   come();
 }
 
@@ -109,6 +113,19 @@ void populateStove() {
   }
 }
 
+void populateJuicer() {
+  int x = 576;
+  for(int r = 0; r < juicer.length; r++) {
+    int y = 514;
+    for (int c = 0; c < juicer[r].length; c++) {
+      juicer[r][c] = new Juicer(x,y);
+      y += 114;
+  }
+  x += 114;
+}
+}
+
+
 void drawIngredients() {
   for (Ingredients[] row : ingredient) {
     for (Ingredients i : row) {
@@ -122,6 +139,14 @@ void drawCustomers() {
     c.display();
     fill(0);
     text(c.printOrder(), c.xPos + 50, c.yPos + 20);
+  }
+}
+
+void drawJuicers() {
+  for(Juicer[] jRow: juicer) {
+    for(Juicer j: jRow) {
+      j.display();
+    }
   }
 }
 
