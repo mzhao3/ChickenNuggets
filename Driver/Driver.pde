@@ -7,7 +7,7 @@ Stack<Food> makeOrder;
 Ingredients[][] ingredient;
 Stove[][] stove;
 float totalTips, xPos, yPos;
-int cursorValue = 11;
+int cursorValue = 10;
 int numLeave;
 
 void setup() {
@@ -32,6 +32,42 @@ void draw() {
   drawStoves();
   drawCursor();
   come();
+}
+
+void mousePressed() {
+  ingredientCheck(mouseX, mouseY);
+}
+
+void ingredientCheck(float x, float y) {
+  if (isWithin(x, 20, 70, y, 520, 570)) {
+    cursorValue = 0;
+  } else if (isWithin(x, 80, 130, y, 520, 570)) {
+    cursorValue = 1;
+  } else if (isWithin(x, 140, 190, y, 520, 570)) {
+    cursorValue = 2;
+  } else if (isWithin(x, 200, 250, y, 520, 570)) {
+    cursorValue = 3;
+  } else if (isWithin(x, 260, 310, y, 520, 570)) {
+    cursorValue = 4;
+  } else if (isWithin(x, 20, 70, y, 640, 690)) {
+    cursorValue = 5;
+  } else if (isWithin(x, 80, 130, y, 640, 690)) {
+    cursorValue = 6;
+  } else if (isWithin(x, 140, 190, y, 640, 690)) {
+    cursorValue = 7;
+  } else if (isWithin(x, 200, 250, y, 640, 690)) {
+    cursorValue = 8;
+  } else if (isWithin(x, 260, 310, y, 640, 690)) {
+    cursorValue = 9;
+  }
+}
+
+boolean isBetween(float currPos, float lower, float upper) {
+  return currPos >= lower && currPos <= upper;
+}
+
+boolean isWithin(float xPos, float lowerX, float upperX, float yPos, float lowerY, float upperY) {
+  return isBetween(xPos, lowerX, upperX) && isBetween(yPos, lowerY, upperY);
 }
 
 void drawCursor() {
