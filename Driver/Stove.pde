@@ -6,4 +6,11 @@ class Stove extends Kitchen {
     efficiency = 1;
   }
 
+
+
+  double cook(Ingredients y) {
+    y.reduceCookTime();
+    y.setCooked();
+    return y.getCookTime();
+  }
 }

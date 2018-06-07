@@ -10,6 +10,8 @@ Juicer[][] juicer;
 float totalTips, xPos, yPos;
 int cursorValue = 10;
 int numLeave;
+Stove used; 
+Juicer usedJ;
 
 void setup() {
   rectMode(CORNER);
@@ -36,10 +38,13 @@ void draw() {
   drawCursor();
   drawJuicers();
   come();
+  startCook();
 }
 
 void mousePressed() {
   ingredientCheck(mouseX, mouseY);
+  stoveCheck(mouseX, mouseY);
+  juicerCheck(mouseX, mouseY);
 }
 
 void ingredientCheck(float x, float y) {
@@ -66,6 +71,26 @@ void ingredientCheck(float x, float y) {
   }
 }
 
+void stoveCheck(float x, float y) {
+  for (int a = 0; a < 2; a ++ ) {
+    for (int b = 0; b < 2; b ++) {
+      if (isWithin(x, stove[a][b].xPos, stove[a][b].xPos + 114, y, stove[a][b].yPos, stove[a][b].yPos + 114) ) {
+        used = stove[a][b];
+      }
+    }
+  }
+}
+
+void juicerCheck(float x, float y) { 
+  for (int a = 0; a < 2; a ++ ) {
+    for (int b = 0; b < 1; b ++) {
+      if (isWithin(x, juicer[a][b].xPos, juicer[a][b].xPos + 114, y, juicer[a][b].yPos, juicer[a][b].yPos + 114) ) {
+        usedJ = juicer[a][b];
+      }
+    }
+  }
+}
+
 boolean isBetween(float currPos, float lower, float upper) {
   return currPos >= lower && currPos <= upper;
 }
@@ -78,14 +103,21 @@ void drawCursor() {
   PImage temp;
   xPos = mouseX;
   yPos = mouseY;
-  if (cursorValue < 5) {
-    temp = ingredient[0][cursorValue].img;
+  if (cursorValue < 10) {
+    temp = getIngredient().img;
     image(temp, xPos - 15, yPos - 15, 30, 30);
-  } else if (cursorValue < 10) {
-    temp = ingredient[1][cursorValue - 5].img;
-    image(temp, xPos - 15, yPos -15, 30, 30);
   }
 }
+
+Ingredients getIngredient() {
+  if (cursorValue < 5) {
+    return ingredient[0][cursorValue];
+  } else if (cursorValue < 10) {
+    return ingredient[1][cursorValue - 5];
+  } else
+    return null;
+}
+
 
 void populateIngredient() {
   //50 x 50
@@ -115,14 +147,14 @@ void populateStove() {
 
 void populateJuicer() {
   int x = 576;
-  for(int r = 0; r < juicer.length; r++) {
+  for (int r = 0; r < juicer.length; r++) {
     int y = 514;
     for (int c = 0; c < juicer[r].length; c++) {
-      juicer[r][c] = new Juicer(x,y);
+      juicer[r][c] = new Juicer(x, y);
       y += 114;
+    }
+    x += 114;
   }
-  x += 114;
-}
 }
 
 
@@ -143,8 +175,8 @@ void drawCustomers() {
 }
 
 void drawJuicers() {
-  for(Juicer[] jRow: juicer) {
-    for(Juicer j: jRow) {
+  for (Juicer[] jRow : juicer) {
+    for (Juicer j : jRow) {
       j.display();
     }
   }
@@ -179,18 +211,41 @@ void come() {
     c.setPOrder(y);
     y-= 100;
   }
-
-  // CLICKING!!
-
-  // with kitchen equipment :) 
-  /**
-   void cook() {
-   if (cursorValue < 6) {
-   
-   }
-   }
-   **/
 }
+
+// CLICKING!!
+
+// with kitchen equipment :) 
+
+void startCook() {
+  if ( 0 < cursorValue && cursorValue < 6 && used != null && used.inUse == false) {
+    String ingredientName = "" + getIngredient().type;
+    Ingredients toCook = new Ingredients(ingredientName, (int)used.xPos, (int)used.yPos, loadImage("Image/"+ingredientName+".png"));
+    used.cook( toCook );
+
+    image(toCook.img, toCook.xPos, toCook.yPos, 30, 30);
+    text(toCook.cookTime + "", toCook.xPos + 50, toCook.yPos + 20);
+    cursorValue = 10;
+    used.inUse = true;
+    used = null;
+  }
+}
+
+void startJuicing () {
+  if (  cursorValue > 7 && usedJ != null && usedJ.inUse == false) {
+    String ingredientName = "" + getIngredient().type;
+    Ingredients toJuice = new Ingredients(ingredientName, (int)usedJ.xPos, (int)usedJ.yPos, loadImage("Image/"+ingredientName+".png"));
+    usedJ.juice( toJuice );
+
+    image(toJuice.img, xPos, yPos, 30, 30);
+
+    cursorValue = 10;
+    usedJ.inUse = true;
+    usedJ = null;
+  }
+}
+
+
 
 void leave() {
 }

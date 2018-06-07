@@ -1,7 +1,9 @@
 class Kitchen {
   PImage img;
-  int xPos, yPos;
+  float xPos, yPos;
   int efficiency;
+  boolean inUse = false;
+
   Ingredients currFood;
   
   Kitchen(int x, int y) {
