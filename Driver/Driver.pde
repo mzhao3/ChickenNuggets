@@ -101,8 +101,8 @@ void stoveCook() {
   }
 }
 
-//check if the mouse is within the region of the stov
-//if the stove is being used then draw whatever it the stove is storinge
+//check if the mouse is within the region of the stove
+//if the stove is not being used then tell Stove to store the cursor as its currFood
 void stoveCheck(float x, float y) {
   for (int r = 0; r < 2; r ++ ) {
     for (int c = 0; c < 2; c ++) {
