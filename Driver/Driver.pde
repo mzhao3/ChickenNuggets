@@ -11,8 +11,6 @@ Juicer[][] juicer;
 float totalTips, xPos, yPos;
 int cursorValue = 10; //every ingredients icon on the screen are numbered 0-9 corresponding to the Ingredients object 
 int numLeave;
-Stove used; //keep track of which stove is being used
-Juicer usedJ;  //keep track of which juicer is being used 
 
 //instantiate the instance variables
 //populate the icons for Ingredients and kitchen items
@@ -42,9 +40,12 @@ void draw() {
   drawIngredients();
   drawCustomers();
   drawStoves();
-  drawCursor();
   drawJuicers();
+  drawTrash();
+  drawTray();  
+  drawCursor();
   stoveCook();
+  juiceCook();
   come();
 }
 
@@ -54,6 +55,8 @@ void mousePressed() {
   ingredientCheck(mouseX, mouseY);
   stoveCheck(mouseX, mouseY);
   juicerCheck(mouseX, mouseY);
+  trash();
+  makeTray();
 }
 
 //Assign cursorValue to each of the ingredients icon
@@ -88,13 +91,26 @@ void stoveCook() {
   for (int r = 0; r < 2; r ++ ) {
     for (int c = 0; c < 2; c ++) {
       if (stove[r][c].inUse == true) {
-        System.out.println(stove[r][c].inUse);
         int x = stove[r][c].xPos;
         int y = stove[r][c].yPos;        
-        text(stove[r][c].makeFood() + "", x, y);
-        if (stove[r][c].currFood.cookTime <= 0) {
+        text(stove[r][c].makeFood() + "", x, y, 30, 30);
+        if (stove[r][c].currFood.cookTime <= -300) {
           stove[r][c].inUse = false;
-          stove[r][c].currFood = null;
+          //stove[r][c].currFood = null;
+        }
+      }
+    }
+  }
+}
+
+void juiceCook() { 
+  for (int r = 0; r < 2; r ++ ) {
+    for (int c = 0; c < 1; c ++) {
+      if (juicer[r][c].inUse == true) {
+        int x = juicer[r][c].xPos;
+        int y = stove[r][c].yPos;
+        text(juicer[r][c].makeFood()+"", x, y);
+        if (juicer[r][c].currFood.cookTime <= 0) {
         }
       }
     }
@@ -113,7 +129,12 @@ void stoveCheck(float x, float y) {
           Ingredients storedFood = new Ingredients(temp.type, stove[r][c].xPos + 25, stove[r][c].yPos + 25, temp.img);
           stove[r][c].currFood = storedFood;
         }
-        //used = stove[r][c];
+        //cursorValue = 10;
+        //if (cursorValue == 10 && stove[r][c].currFood.isCooked == true) {
+          //Ingredients storedFood = null;
+          //stove[r][c].currFood = null;        
+          //used = stove[r][c];
+        //}
       }
     }
   }
@@ -136,6 +157,12 @@ void juicerCheck(float x, float y) {
   }
 }
 
+void customerCheck(float x, float y) { 
+  if (isWithin(x, 50, 100, y, 450, 550) ) {
+    customerList.peek().printOrder();
+  }
+}
+
 //helper function for stoveCheck and juicerCheck
 boolean isBetween(float currPos, float lower, float upper) {
   return currPos >= lower && currPos <= upper;
@@ -153,7 +180,7 @@ void drawCursor() {
   yPos = mouseY;
   if (cursorValue < 10) {
     temp = getIngredient().img;
-    image(temp, xPos - 15, yPos - 15, 50, 30);
+    image(temp, xPos - 15, yPos - 15, 30, 30);
   }
 }
 
@@ -246,9 +273,28 @@ void drawStoves() {
   }
 }
 
+void drawTrash() { 
+  PImage img = loadImage("Image/trash.png");
+  image(img, 692, 514, 100, 100);
+}
+
+void drawTray() {
+  PImage img = loadImage("Image/tray.jpg");
+  image(img, 692, 628, 100, 100);
+}
+
 //if the order is burnt or does not match the order, remove the order and remake
 void trash() {
-  makeOrder.pop();
+  if (isWithin(mouseX, 692, 792, mouseY, 514, 614))
+    cursorValue = 10;
+  //makeOrder.pop();
+}
+
+void makeTray() {
+  if (isWithin(mouseX, 692, 792, mouseY, 628, 728) ) {
+    if (cursorValue < 10) 
+      getIngredient().display();
+  }
 }
 
 //spawn the customers
@@ -273,38 +319,10 @@ void come() {
   }
 }
 
-// CLICKING!!
-
-// with kitchen equipment :) 
-
-/*void startCook() {
- if ( 0 <= cursorValue && cursorValue < 5 && used != null && used.inUse == false) {
- String ingredientName = "" + getIngredient().type;
- Ingredients toCook = new Ingredients(ingredientName, (int)used.xPos, (int)used.yPos, loadImage("Image/"+ingredientName+".png"));
- used.cook( toCook );
- image(toCook.img, toCook.xPos, toCook.yPos, 30, 30);
- text(toCook.cookTime + "", toCook.xPos + 50, toCook.yPos + 20);
- cursorValue = 10;
- used.inUse = true;
- used = null;
- }
- }
- 
- void startJuicing () {
- if (  cursorValue > 7 && usedJ != null && usedJ.inUse == false) {
- String ingredientName = "" + getIngredient().type;
- Ingredients toJuice = new Ingredients(ingredientName, (int)usedJ.xPos, (int)usedJ.yPos, loadImage("Image/"+ingredientName+".png"));
- usedJ.juice( toJuice );
- 
- image(toJuice.img, xPos, yPos, 30, 30);
- 
- cursorValue = 10;
- usedJ.inUse = true;
- usedJ = null;
- }
- }
- 
- */
-
 void leave() {
+  Customer c = customerList.peek();
+  if (c.waitTime < 0) {
+    text(c.comment, c.xPos + 50, c.yPos + 20);
+    customerList.remove();
+  }
 }
