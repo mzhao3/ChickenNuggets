@@ -1,7 +1,7 @@
 class Ingredients {
-  boolean isCooked = false;
-  boolean isBurned = false;
-  double cookTime;
+  boolean isCooked;
+  boolean isBurned;
+  double cookTime = 300;
   double cookSpeed;
   int xPos, yPos;
   PImage img;
@@ -25,10 +25,6 @@ class Ingredients {
     image(img, xPos, yPos, 50, 50);
   }
 
-  double getCookTime() {
-    return cookTime;
-  }
-
   void setCooked() {
     if (cookTime <= -50) {
       isBurned = true;
@@ -37,7 +33,5 @@ class Ingredients {
     }
   }
 
-  void reduceCookTime() {
-    cookTime -= 1;
-  }
+
 }

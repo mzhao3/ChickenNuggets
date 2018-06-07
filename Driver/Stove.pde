@@ -5,12 +5,4 @@ class Stove extends Kitchen {
     img = loadImage("Image/stove.png");
     efficiency = 1;
   }
-
-
-
-  double cook(Ingredients y) {
-    y.reduceCookTime();
-    y.setCooked();
-    return y.getCookTime();
-  }
 }

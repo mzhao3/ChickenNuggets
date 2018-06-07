@@ -32,13 +32,14 @@ void draw() {
   rect(0, 0, 1024, 500);
   fill(255);
   rect(0, 500, 1024, 268);
+  fill(0);
   drawIngredients();
   drawCustomers();
   drawStoves();
   drawCursor();
   drawJuicers();
+  stoveCook();
   come();
-  startCook();
 }
 
 void mousePressed() {
@@ -71,21 +72,49 @@ void ingredientCheck(float x, float y) {
   }
 }
 
+void stoveCook() {
+  for (int r = 0; r < 2; r ++ ) {
+    for (int c = 0; c < 2; c ++) {
+      if (stove[r][c].inUse == true) {
+        System.out.println(stove[r][c].inUse);
+        int x = stove[r][c].xPos;
+        int y = stove[r][c].yPos;        
+        text(stove[r][c].makeFood() + "", x, y);
+        if (stove[r][c].currFood.cookTime <= 0) {
+          stove[r][c].inUse = false;
+          stove[r][c].currFood = null;
+        }
+      }
+    }
+  }
+}
+
 void stoveCheck(float x, float y) {
-  for (int a = 0; a < 2; a ++ ) {
-    for (int b = 0; b < 2; b ++) {
-      if (isWithin(x, stove[a][b].xPos, stove[a][b].xPos + 114, y, stove[a][b].yPos, stove[a][b].yPos + 114) ) {
-        used = stove[a][b];
+  for (int r = 0; r < 2; r ++ ) {
+    for (int c = 0; c < 2; c ++) {
+      if (isWithin(x, stove[r][c].xPos, stove[r][c].xPos + 100, y, stove[r][c].yPos, stove[r][c].yPos + 100) ) {
+        if (cursorValue >= 0 && cursorValue < 5) {
+          stove[r][c].inUse = true;
+          Ingredients temp = ingredient[0][cursorValue];
+          Ingredients storedFood = new Ingredients(temp.type, stove[r][c].xPos + 25, stove[r][c].yPos + 25, temp.img);
+          stove[r][c].currFood = storedFood;
+        }
+        //used = stove[r][c];
       }
     }
   }
 }
 
 void juicerCheck(float x, float y) { 
-  for (int a = 0; a < 2; a ++ ) {
-    for (int b = 0; b < 1; b ++) {
-      if (isWithin(x, juicer[a][b].xPos, juicer[a][b].xPos + 114, y, juicer[a][b].yPos, juicer[a][b].yPos + 114) ) {
-        usedJ = juicer[a][b];
+  for (int r = 0; r < 2; r ++ ) {
+    for (int c = 0; c < 1; c ++) {
+      if (isWithin(x, juicer[r][c].xPos, juicer[r][c].xPos + 100, y, juicer[r][c].yPos, juicer[r][c].yPos + 100) ) {
+        if (cursorValue > 7 && cursorValue < 10) {
+          juicer[r][c].inUse = true;
+          Ingredients temp = ingredient[1][cursorValue - 5];
+          Ingredients storedFood = new Ingredients(temp.type, juicer[r][c].xPos + 25, juicer[r][c].yPos + 25, temp.img);
+          juicer[r][c].currFood = storedFood;
+        }
       }
     }
   }
@@ -105,7 +134,7 @@ void drawCursor() {
   yPos = mouseY;
   if (cursorValue < 10) {
     temp = getIngredient().img;
-    image(temp, xPos - 15, yPos - 15, 30, 30);
+    image(temp, xPos - 15, yPos - 15, 50, 30);
   }
 }
 
@@ -134,26 +163,26 @@ void populateIngredient() {
 }
 
 void populateStove() {
-  int x = 350;
+  int y = 514;
   for (int r = 0; r < stove.length; r++) {
-    int y = 514;
+    int x = 350;
     for (int c = 0; c < stove[r].length; c++) {
       stove[r][c] = new Stove(x, y);
-      y += 114;
+      x+= 114;
     }
-    x+= 114;
+    y += 114;
   }
 }
 
 void populateJuicer() {
-  int x = 576;
+  int y = 514;
   for (int r = 0; r < juicer.length; r++) {
-    int y = 514;
+    int x = 578;
     for (int c = 0; c < juicer[r].length; c++) {
       juicer[r][c] = new Juicer(x, y);
-      y += 114;
+      x += 114;
     }
-    x += 114;
+    y += 114;
   }
 }
 
@@ -217,35 +246,34 @@ void come() {
 
 // with kitchen equipment :) 
 
-void startCook() {
-  if ( 0 < cursorValue && cursorValue < 6 && used != null && used.inUse == false) {
-    String ingredientName = "" + getIngredient().type;
-    Ingredients toCook = new Ingredients(ingredientName, (int)used.xPos, (int)used.yPos, loadImage("Image/"+ingredientName+".png"));
-    used.cook( toCook );
-
-    image(toCook.img, toCook.xPos, toCook.yPos, 30, 30);
-    text(toCook.cookTime + "", toCook.xPos + 50, toCook.yPos + 20);
-    cursorValue = 10;
-    used.inUse = true;
-    used = null;
-  }
-}
-
-void startJuicing () {
-  if (  cursorValue > 7 && usedJ != null && usedJ.inUse == false) {
-    String ingredientName = "" + getIngredient().type;
-    Ingredients toJuice = new Ingredients(ingredientName, (int)usedJ.xPos, (int)usedJ.yPos, loadImage("Image/"+ingredientName+".png"));
-    usedJ.juice( toJuice );
-
-    image(toJuice.img, xPos, yPos, 30, 30);
-
-    cursorValue = 10;
-    usedJ.inUse = true;
-    usedJ = null;
-  }
-}
-
-
+/*void startCook() {
+ if ( 0 <= cursorValue && cursorValue < 5 && used != null && used.inUse == false) {
+ String ingredientName = "" + getIngredient().type;
+ Ingredients toCook = new Ingredients(ingredientName, (int)used.xPos, (int)used.yPos, loadImage("Image/"+ingredientName+".png"));
+ used.cook( toCook );
+ image(toCook.img, toCook.xPos, toCook.yPos, 30, 30);
+ text(toCook.cookTime + "", toCook.xPos + 50, toCook.yPos + 20);
+ cursorValue = 10;
+ used.inUse = true;
+ used = null;
+ }
+ }
+ 
+ void startJuicing () {
+ if (  cursorValue > 7 && usedJ != null && usedJ.inUse == false) {
+ String ingredientName = "" + getIngredient().type;
+ Ingredients toJuice = new Ingredients(ingredientName, (int)usedJ.xPos, (int)usedJ.yPos, loadImage("Image/"+ingredientName+".png"));
+ usedJ.juice( toJuice );
+ 
+ image(toJuice.img, xPos, yPos, 30, 30);
+ 
+ cursorValue = 10;
+ usedJ.inUse = true;
+ usedJ = null;
+ }
+ }
+ 
+ */
 
 void leave() {
 }
