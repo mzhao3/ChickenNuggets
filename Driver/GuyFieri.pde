@@ -2,13 +2,14 @@ class GuyFieri extends Customer{
    GuyFieri() {
     super();
     img = loadImage("Image/Guy.png");
-    priority = 1; //1
-    waitTime = 15;
-    tipRate = 0.2;
+    priority = 1; //higher priority than regular customers
+    waitTime = 15; //shorter wait time
+    tipRate = 0.2; //higher tip rate
     isLeaving = false; 
   }
   
-  
+    //once food is served, Guy will leave a comment
+
   void advise() {
      int random = (int)(Math.random() * 3);
     if (random == 0) {

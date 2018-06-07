@@ -2,22 +2,27 @@ import java.util.PriorityQueue;
 import java.util.LinkedList;
 import java.util.Stack;
 
+//instance variables 
 PriorityQueue<Customer> customerList;
-Stack<Food> makeOrder;
+Stack<Food> makeOrder; //stack of orders
 Ingredients[][] ingredient;
 Stove[][] stove;
 Juicer[][] juicer;
 float totalTips, xPos, yPos;
-int cursorValue = 10;
+int cursorValue = 10; //every ingredients icon on the screen are numbered 0-9 corresponding to the Ingredients object 
 int numLeave;
-Stove used; 
-Juicer usedJ;
+Stove used; //keep track of which stove is being used
+Juicer usedJ;  //keep track of which juicer is being used 
 
+//instantiate the instance variables
+//populate the icons for Ingredients and kitchen items
 void setup() {
+  //specify display windows
   rectMode(CORNER);
   imageMode(CORNER);
   size(1024, 768);
   background(0);
+  //instantiate and populate
   customerList = new PriorityQueue<Customer>();
   ingredient = new Ingredients[2][5];
   populateIngredient();
@@ -27,11 +32,12 @@ void setup() {
   populateJuicer();
 }
 
+//draw all the icons and launch the game
 void draw() {
   fill(0, 255, 255);
-  rect(0, 0, 1024, 500);
+  rect(0, 0, 1024, 500); //draw the room, fill it blue
   fill(255);
-  rect(0, 500, 1024, 268);
+  rect(0, 500, 1024, 268); //draw the table, fill it white
   fill(0);
   drawIngredients();
   drawCustomers();
@@ -42,36 +48,42 @@ void draw() {
   come();
 }
 
+//function called once after every time a mouse is pressed.
+//Will check if the current mouse position is on an ingredient icon, a stove icon or a juicer icon
 void mousePressed() {
   ingredientCheck(mouseX, mouseY);
   stoveCheck(mouseX, mouseY);
   juicerCheck(mouseX, mouseY);
 }
 
+//Assign cursorValue to each of the ingredients icon
 void ingredientCheck(float x, float y) {
   if (isWithin(x, 20, 70, y, 520, 570)) {
-    cursorValue = 0;
+    cursorValue = 0; //cheese
   } else if (isWithin(x, 80, 130, y, 520, 570)) {
-    cursorValue = 1;
+    cursorValue = 1; //chicken
   } else if (isWithin(x, 140, 190, y, 520, 570)) {
-    cursorValue = 2;
+    cursorValue = 2; //beef
   } else if (isWithin(x, 200, 250, y, 520, 570)) {
-    cursorValue = 3;
+    cursorValue = 3; //bacon
   } else if (isWithin(x, 260, 310, y, 520, 570)) {
-    cursorValue = 4;
+    cursorValue = 4; //fish
   } else if (isWithin(x, 20, 70, y, 640, 690)) {
-    cursorValue = 5;
+    cursorValue = 5; //tomato
   } else if (isWithin(x, 80, 130, y, 640, 690)) {
-    cursorValue = 6;
+    cursorValue = 6; //bread
   } else if (isWithin(x, 140, 190, y, 640, 690)) {
-    cursorValue = 7;
+    cursorValue = 7; //lettuce
   } else if (isWithin(x, 200, 250, y, 640, 690)) {
-    cursorValue = 8;
+    cursorValue = 8; //apple
   } else if (isWithin(x, 260, 310, y, 640, 690)) {
-    cursorValue = 9;
+    cursorValue = 9; //orange
   }
 }
 
+//check if the cursor is dragged toward an unoccupied stove
+//keep track of time
+//renew state of stove once food is cooked
 void stoveCook() {
   for (int r = 0; r < 2; r ++ ) {
     for (int c = 0; c < 2; c ++) {
@@ -89,6 +101,8 @@ void stoveCook() {
   }
 }
 
+//check if the mouse is within the region of the stov
+//if the stove is being used then draw whatever it the stove is storinge
 void stoveCheck(float x, float y) {
   for (int r = 0; r < 2; r ++ ) {
     for (int c = 0; c < 2; c ++) {
@@ -105,6 +119,8 @@ void stoveCheck(float x, float y) {
   }
 }
 
+//check if the ingredients cursor is within the region of the juicer
+//if it is within the region, then store the juicer as an used Juicer, meaning it cannot be occupied until the ingredients is ready
 void juicerCheck(float x, float y) { 
   for (int r = 0; r < 2; r ++ ) {
     for (int c = 0; c < 1; c ++) {
@@ -120,14 +136,17 @@ void juicerCheck(float x, float y) {
   }
 }
 
+//helper function for stoveCheck and juicerCheck
 boolean isBetween(float currPos, float lower, float upper) {
   return currPos >= lower && currPos <= upper;
 }
 
+//helper fuction for stoveCheck and JuicerCheck
 boolean isWithin(float xPos, float lowerX, float upperX, float yPos, float lowerY, float upperY) {
   return isBetween(xPos, lowerX, upperX) && isBetween(yPos, lowerY, upperY);
 }
 
+//when user clicked on the ingredients icon, a cursor of the icon appears and the user may move it to the kitchen equipments
 void drawCursor() {
   PImage temp;
   xPos = mouseX;
@@ -138,6 +157,9 @@ void drawCursor() {
   }
 }
 
+//return Ingredients based on whether it is cookable
+//top row must be used on stove
+//cursor 8 and 9 must be used on juicer
 Ingredients getIngredient() {
   if (cursorValue < 5) {
     return ingredient[0][cursorValue];
@@ -147,7 +169,7 @@ Ingredients getIngredient() {
     return null;
 }
 
-
+//specify the location of the Ingredients icon
 void populateIngredient() {
   //50 x 50
   ingredient[0][0] = new Ingredients("cheese", 20, 520, loadImage("Image/cheese.png"));
@@ -162,6 +184,7 @@ void populateIngredient() {
   ingredient[1][4] = new Ingredients("orange", 260, 640, loadImage("Image/orange.png"));
 }
 
+//specify the location of the stove icon
 void populateStove() {
   int y = 514;
   for (int r = 0; r < stove.length; r++) {
@@ -174,6 +197,7 @@ void populateStove() {
   }
 }
 
+//specify the location of the juicer icon
 void populateJuicer() {
   int y = 514;
   for (int r = 0; r < juicer.length; r++) {
@@ -186,7 +210,7 @@ void populateJuicer() {
   }
 }
 
-
+//display the ingredients icon in 2 x 5 matrix
 void drawIngredients() {
   for (Ingredients[] row : ingredient) {
     for (Ingredients i : row) {
@@ -195,6 +219,7 @@ void drawIngredients() {
   }
 }
 
+//display the customers in the Pqueue
 void drawCustomers() {
   for (Customer c : customerList) {
     c.display();
@@ -203,6 +228,7 @@ void drawCustomers() {
   }
 }
 
+//display the juicer icon in 2 x 1 matrix
 void drawJuicers() {
   for (Juicer[] jRow : juicer) {
     for (Juicer j : jRow) {
@@ -211,6 +237,7 @@ void drawJuicers() {
   }
 }
 
+//display the stove icon in 2 x 2 matrix
 void drawStoves() {
   for (Stove[] sRow : stove) {
     for (Stove s : sRow) {
@@ -219,10 +246,14 @@ void drawStoves() {
   }
 }
 
+//if the order is burnt or does not match the order, remove the order and remake
 void trash() {
   makeOrder.pop();
 }
 
+//spawn the customers
+//Different types of customers have different probability to show up every second
+//special customers may skip regular customers in the PQueue
 void come() {
   float randInt = (float)Math.random();
   //~3% for special customers & ~10% for regular customers

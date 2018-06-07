@@ -4,16 +4,19 @@ class Kitchen {
   boolean inUse;
   Ingredients currFood;
 
+  //construct kitchen
   Kitchen(int x, int y) {
     xPos = x;
     yPos = y;
   }
   
+  //timer
   int makeFood() {
     currFood.cookTime = currFood.cookTime -=1;
     return (int) (currFood.cookTime / 60);
   }
   
+  //create white space / room to contain kitchen item
   void display() {
     noFill();
     stroke(0);

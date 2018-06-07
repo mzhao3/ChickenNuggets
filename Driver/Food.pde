@@ -5,6 +5,9 @@ class Food {
   float price;
   Stack<Ingredients> components = new Stack<Ingredients>(); 
 // need to differentiate between cooked beef and raw beef 
+  
+  //specify the default way of placing the Ingredients
+  //if the order of the Ingredients is violated, then the Food must be trashed
   Food(String newType) {
     type = newType;
     if (type.equals("hamburgers")) {
@@ -48,11 +51,12 @@ class Food {
     }
   }
 
-
+  //return name of food
   String getType() {
     return type;
   }
 
+  //return price of food
   double getPrice() {
     return price;
   }

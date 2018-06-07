@@ -4,13 +4,14 @@ class GordanRamsay extends Customer{
 
   GordanRamsay() {
     super();
-    priority = 1; //test = 1
-    waitTime = 10;
+    priority = 1; ////higher priority than regular customers
+    waitTime = 10;  //less wait time than regular
     tipRate = 0.15;
     img = loadImage("Image/Gordan.png");
     isLeaving = false; 
   }
   
+  //Once food is served Gordon Ramsay will leave a comment
   void flame() {
     int random = (int)(Math.random() * 3);
     if (random == 0) {

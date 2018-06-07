@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 
+//instance variables
 class Customer implements Comparable<Customer>{
   String[] menu = {"hamburger", "chickenburger", "grilledcheese", 
   "salad", "orangeJuice", "appleJuice"};
@@ -10,6 +11,7 @@ class Customer implements Comparable<Customer>{
   String comment;
   PImage img;
   
+  //default constructor: instantiate the instance variables
   Customer() {
     priority = 2;
     tipRate = 0.15;
@@ -41,7 +43,7 @@ class Customer implements Comparable<Customer>{
 
   
   //------------Customer's methods----------------
-  
+    //randomly adds items from the menu to the orderList
   LinkedList<Food> makeOrder(int numItem) {
     for (int x = numItem; x >= 0; x--) {
       orderList.add(new Food(menu[(int)(Math.random() * menu.length)]));
@@ -49,6 +51,7 @@ class Customer implements Comparable<Customer>{
     return orderList;
   }
   
+   //return the name of each food in the orderList
   ArrayList<String> getOrder() {
     ArrayList<String> typeList = new ArrayList<String>();
     for(Food order: orderList) {
@@ -57,6 +60,7 @@ class Customer implements Comparable<Customer>{
     return typeList;
   }
   
+    //display the name of each food in the orderList
   String printOrder() {
     String types = "";
     for(Food order: orderList) {
@@ -65,7 +69,7 @@ class Customer implements Comparable<Customer>{
     return types;  
   }
   
-  
+    //once order is successfully served, you will receive tips for service
   double setTips() {
     double total = 0;
     for(Food order: orderList) {
@@ -73,11 +77,13 @@ class Customer implements Comparable<Customer>{
     }
     return total * tipRate;
   }
-  
+ 
+    //create icon for customer
   void display() {
     image(img, xPos, yPos, 50, 100);
   }
-  
+
+  //create the animation of a queue of customers
   void setPOrder(int newY) {
     yPos = newY;
   }
