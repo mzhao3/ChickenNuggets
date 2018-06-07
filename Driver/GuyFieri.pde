@@ -8,10 +8,6 @@ class GuyFieri extends Customer{
     isLeaving = false; 
   }
   
-  GuyFieri(float y) {
-    this();
-    yPos = y;
-  }
   
   void advise() {
      int random = (int)(Math.random() * 3);

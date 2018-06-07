@@ -7,7 +7,6 @@ Stack<Food> makeOrder;
 Ingredients[][] ingredient;
 float totalTips;
 int numLeave;
-int yPos = 400;
 
 void setup() {
   rectMode(CORNER);
@@ -54,12 +53,9 @@ void drawCustomers() {
   for (Customer c : customerList) {
     c.display();
     fill(0);
-    text(c.printOrder(), c.xPos + 50, c.yPos + 20); 
+    text(c.printOrder(), c.xPos + 50, c.yPos + 20);
   }
-    //System.out.println(c.getOrder());
-  }
-
-
+}
 
 void trash() {
   makeOrder.pop();
@@ -67,52 +63,33 @@ void trash() {
 
 void come() {
   float randInt = (float)Math.random();
-  //~11.6%
-  if (randInt <= .0025) {
-    customerList.add(new Customer(yPos));
-    yPos -= 100;
+  //~3% for special customers & ~10% for regular customers
+  if (randInt <= .00051) {
+    customerList.add(new Troll());
+  } else if (randInt <= .00102) {
+    customerList.add(new GordanRamsay());
+  } else if (randInt <= .00153) {
+    customerList.add(new GuyFieri());
+  } else if (randInt <= .00283) {
+    customerList.add(new Customer());
   }
-  if(randInt <= .0015) {
-    customerList.add(new GordanRamsay(yPos));
-    yPos -= 100;
-  }
-  if(randInt <= .001) {
-    customerList.add(new GuyFieri(yPos));
-    yPos -= 100;
-  }
-  if(randInt <= .0006) {
-    customerList.add(new Troll(yPos));
-    yPos -= 100;
+  int y = 400;
+  for (Customer c : customerList) {
+    c.setPOrder(y);
+    y-= 100;
   }
 
-  //PriorityQueue is min heap
-  /*
-  Customer temp = new Customer(1);
-   Customer temp1 = new Customer(2);
-   Customer temp2 = new Customer(1);
-   Customer temp3 = new Customer(1);
-   Customer temp4 = new Customer(2);
-   customerList.add(temp);
-   customerList.add(temp1);
-   customerList.add(temp2);
-   customerList.add(temp3);
-   customerList.add(temp4);
-   System.out.println(customerList);
-   */
-   
-   // CLICKING!!
-   
-   // with kitchen equipment :) 
-   /**
-void cook() {
-  if (cursorValue < 6) {
-    
-  }
-}
-**/
+  // CLICKING!!
 
+  // with kitchen equipment :) 
+  /**
+   void cook() {
+   if (cursorValue < 6) {
+   
+   }
+   }
+   **/
 }
 
-void leave() { 
-
+void leave() {
 }

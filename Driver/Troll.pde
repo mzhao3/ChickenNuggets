@@ -5,15 +5,7 @@ class Troll extends Customer{
     waitTime = 15;  //shorter wait time
     tipRate = 0.1;  //less tip
     img = loadImage("Image/troll.png");
-    isLeaving = false; 
-  }
-  
-  Troll(float y) {
-    this();
-    yPos = y;
-  }
-  
-  void skip() {
+    isLeaving = false;
     priority = 0;
   }
   

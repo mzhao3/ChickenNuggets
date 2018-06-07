@@ -6,7 +6,7 @@ class Customer implements Comparable<Customer>{
   LinkedList<Food> orderList = new LinkedList<Food>();
   float tipRate, waitTime;
   boolean isLeaving;
-  float priority, xPos, yPos;
+  int priority, xPos, yPos;
   String comment;
   PImage img;
   
@@ -18,12 +18,8 @@ class Customer implements Comparable<Customer>{
     comment = "Thank you";
     img = loadImage("Image/customer.png");
     xPos = 50;
+    yPos = 450;
     orderList = makeOrder((int)(Math.random() * 3));
-  }
-  
-  Customer(float y) {
-    this();
-    yPos = y;
   }
   
   
@@ -82,5 +78,8 @@ class Customer implements Comparable<Customer>{
     image(img, xPos, yPos, 50, 100);
   }
   
+  void setPOrder(int newY) {
+    yPos = newY;
+  }
  
 }

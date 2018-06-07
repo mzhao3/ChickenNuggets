@@ -11,11 +11,6 @@ class GordanRamsay extends Customer{
     isLeaving = false; 
   }
   
-  GordanRamsay(float y){
-    this();
-    yPos = y;
-  }
-  
   void flame() {
     int random = (int)(Math.random() * 3);
     if (random == 0) {
