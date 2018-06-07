@@ -1,16 +1,9 @@
 class Stove extends Kitchen {
-  
-  Stove() {
-    cookBoost = 0;
-    tipBoost = 5;
-    price = 100;
+
+  Stove(int x, int y) {
+    super(x, y);
+    img = loadImage("Image/stove.png");
+    efficiency = 1;
   }
 
-
-  void improveStats() {
-    cookBoost += 5;
-    tipBoost += 5;
-    price += 100; 
-    
-  }
 }

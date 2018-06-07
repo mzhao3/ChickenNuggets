@@ -2,6 +2,7 @@ class Ingredients {
   boolean isCooked = false;
   boolean isBurned = false;
   double cookTime;
+  double cookSpeed;
   int xPos, yPos;
   PImage img;
   String type;
