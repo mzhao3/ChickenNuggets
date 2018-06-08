@@ -3,8 +3,6 @@ class GuyFieri extends Customer{
     super();
     img = loadImage("Image/Guy.png");
     priority = 1; //higher priority than regular customers
-    waitTime = 15; //shorter wait time
-    tipRate = 0.2; //higher tip rate
     isLeaving = false; 
   }
   

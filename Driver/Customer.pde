@@ -5,7 +5,6 @@ class Customer implements Comparable<Customer>{
   String[] menu = {"hamburger", "chickenburger", "grilledcheese", 
   "salad", "orangeJuice", "appleJuice"};
   LinkedList<Food> orderList = new LinkedList<Food>();
-  float tipRate, waitTime;
   boolean isLeaving;
   int priority, xPos, yPos;
   String comment;
@@ -14,9 +13,6 @@ class Customer implements Comparable<Customer>{
   //default constructor: instantiate the instance variables
   Customer() {
     priority = 2;
-    tipRate = 0.15;
-    waitTime = 20;
-    isLeaving = false;
     comment = "Thank you";
     img = loadImage("Image/customer.png");
     xPos = 50;
@@ -66,20 +62,12 @@ class Customer implements Comparable<Customer>{
   String printOrder() {
     String types = "";
     for(Food order: orderList) {
-      types = types + order.getType() + ", " ;    
+      types = types + order.type + ", " ;    
     }
     return types;  
   }
   
     //once order is successfully served, you will receive tips for service
-  double setTips() {
-    double total = 0;
-    for(Food order: orderList) {
-      total += order.getPrice();
-    }
-    return total * tipRate;
-  }
- 
     //create icon for customer
   void display() {
     image(img, xPos, yPos, 50, 100);

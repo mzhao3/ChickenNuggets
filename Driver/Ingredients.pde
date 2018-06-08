@@ -2,7 +2,6 @@ class Ingredients {
   boolean isCooked;
   boolean isBurned;
   double cookTime = 300;
-  double cookSpeed;
   int xPos, yPos;
   PImage img;
   String type;
@@ -24,16 +23,6 @@ class Ingredients {
     stroke(0);
     rect(xPos, yPos, 50, 50);
     image(img, xPos, yPos, 50, 50);
-  }
-
-  //set the state of the ingredients
-  //if there is no response 50 seconds after the food is cooked, the food will be burnt and trashed
-  void setCooked() {
-    if (cookTime <= -50) {
-      isBurned = true;
-    } else if (cookTime <= 0) {
-      isCooked = true;
-    }
   }
 
 

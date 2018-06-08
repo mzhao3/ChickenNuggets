@@ -5,8 +5,6 @@ class GordanRamsay extends Customer{
   GordanRamsay() {
     super();
     priority = 1; //test = 1
-    waitTime = 10;
-    tipRate = 0.15;
     img = loadImage("Image/Gordan.png");
     isLeaving = false; 
   }

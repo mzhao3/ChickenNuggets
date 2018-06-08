@@ -1,6 +1,6 @@
 class Kitchen {
   PImage img;
-  int efficiency, xPos, yPos;
+  int xPos, yPos;
   boolean inUse;
   Ingredients currFood;
 

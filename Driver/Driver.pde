@@ -1,15 +1,16 @@
 import java.util.PriorityQueue;
 import java.util.LinkedList;
-import java.util.Stack;
 
 //instance variables 
+Food[] menu;
 PriorityQueue<Customer> customerList;
-Stack<Food> makeOrder; //stack of orders
+ArrayList<Ingredients> makeOrder; //stack of orders
+LinkedList<Food> combineOrder;
 Ingredients[][] ingredient;
 Stove[][] stove;
 Juicer[][] juicer;
 float totalTips, xPos, yPos;
-int cursorValue = 30; //every ingredients icon on the screen are numbered 0-9 corresponding to the Ingredients object 
+int cursorValue = 40; //every ingredients icon on the screen are numbered 0-9 corresponding to the Ingredients object 
 int numLeave;
 
 //instantiate the instance variables
@@ -21,6 +22,9 @@ void setup() {
   size(1024, 768);
   background(0);
   //instantiate and populate
+  menu = new Food[6];
+  makeOrder = new ArrayList<Ingredients>();
+  combineOrder = new LinkedList<Food>();
   customerList = new PriorityQueue<Customer>();
   ingredient = new Ingredients[2][5];
   populateIngredient();
@@ -28,7 +32,9 @@ void setup() {
   juicer = new Juicer[2][1];
   populateStove();
   populateJuicer();
+  populateMenu();
 }
+
 
 //draw all the icons and launch the game
 void draw() {
@@ -42,10 +48,13 @@ void draw() {
   drawStoves();
   drawJuicers();
   drawTrash();
-  drawTray();  
+  drawTray();
+  drawServe();
   drawCursor();
   stoveCook();
   juiceCook();
+  displayItem();
+  displayOrder();
   come();
 }
 
@@ -55,9 +64,19 @@ void mousePressed() {
   ingredientCheck(mouseX, mouseY);
   stoveCheck(mouseX, mouseY);
   juicerCheck(mouseX, mouseY);
-  trayCheck(mouseX,mouseY);
-  trash();
-  makeTray();
+  itemCheck(mouseX, mouseY);
+  orderCheck(mouseX, mouseY);
+  serviceCheck(mouseX, mouseY);
+  trash(mouseX, mouseY);
+}
+
+void populateMenu() {
+  menu[0] = new Food("hamburger");
+  menu[1] = new Food("chickenburger");
+  menu[2] = new Food("grilledcheese");
+  menu[3] = new Food("salad");
+  menu[4] = new Food("appleJuice");
+  menu[5] = new Food("orangeJuice");
 }
 
 //Assign cursorValue to each of the ingredients icon
@@ -132,7 +151,7 @@ void stoveCheck(float x, float y) {
           Ingredients temp = ingredient[0][cursorValue];
           Ingredients storedFood = new Ingredients(temp.type, stove[r][c].xPos + 25, stove[r][c].yPos + 25, temp.img);
           stove[r][c].currFood = storedFood;
-        } else if (cursorValue == 30 && stove[r][c].currFood.isCooked == true) { //IT'S COOKED TO PERFECTION
+        } else if (cursorValue == 40 && stove[r][c].inUse == true && stove[r][c].currFood.isCooked == true) { //IT'S COOKED TO PERFECTION
           Ingredients currFood = stove[r][c].currFood;
           if (currFood.type.equals("cheese")) {
             cursorValue = 10;
@@ -147,7 +166,7 @@ void stoveCheck(float x, float y) {
           }
           stove[r][c].currFood = null;
           stove[r][c].inUse = false;
-        } else if (cursorValue == 30 && stove[r][c].currFood.isBurned == true) { //"IT'S BLOODY RAW"
+        } else if (cursorValue == 40 && stove[r][c].inUse == true && stove[r][c].currFood.isBurned == true) { //"IT'S BLOODY RAW"
           Ingredients currFood = stove[r][c].currFood;
           if (currFood.type.equals("cheese")) {
             cursorValue = 20;
@@ -168,34 +187,48 @@ void stoveCheck(float x, float y) {
   }
 }
 
-
-void trayCheck(float x, float y) {
- if(isWithin(x, 692, 792, y, 628, 728) ) {
-   //for the food you put in tray
-   boolean correctI = true;
-   Stack<Ingredients> parts = new Stack<Ingredients>();
-    if (cursorValue >= 10 && cursorValue <20) {
-      parts.push(ingredient[0][cursorValue - 10]);
-    }  
-    if(cursorValue >= 5 && cursorValue < 10)  {
-      parts.push(ingredient[1][cursorValue - 5]);
+void itemCheck(float x, float y) {
+  if (isWithin(x, 692, 792, y, 514, 614) ) {
+    //for the food you put in tray
+    if (cursorValue >= 5 && cursorValue < 8) {
+      Ingredients temp = new Ingredients(ingredient[1][cursorValue - 5].type);
+      makeOrder.add(temp);
+      cursorValue = 40;
+    } else if (cursorValue >= 10 && cursorValue < 15) {
+      Ingredients temp = new Ingredients(ingredient[0][cursorValue - 10].type);
+      makeOrder.add(temp);
+      cursorValue = 40;
+    } else if (cursorValue > 17 && cursorValue < 20) {
+      Ingredients temp = new Ingredients(ingredient[1][cursorValue - 15].type);
+      makeOrder.add(temp);
+      cursorValue = 40;
+    } else if (cursorValue == 40 && !(makeOrder.isEmpty())) {
+      for (int i = 0; i < menu.length; i++) {
+        for (int j = 0; j < menu[i].components.size(); j++) {
+          if (makeOrder.size() == menu[i].components.size()) {
+            if (!(makeOrder.get(j).type.equals(menu[i].components.get(j).type))) {
+              break;
+            }
+            cursorValue = i + 30;
+            ArrayList temp = new ArrayList();
+            makeOrder = temp;
+          }
+          if (makeOrder.isEmpty()) {
+            break;
+          }
+        }
+      }
     }
-    ArrayList<Food> orders = customerList.peek().getOrder(); //get orders of the first customer 
-    Stack<Ingredients> iCheck; //stack of default ingredients for each order
-    //for each orders of the first customer
-    for(int i = 0; i < orders.size(); i++) {
-       iCheck = orders.get(i).getComponents();  //check the ingredients of the first order  
-       for(int j = 0; j < iCheck.size(); j++) {
-         //if the two components (customers and default are equal)
-         if(parts.peek().equals(iCheck.peek())) {
-           correctI = true;
-           iCheck.pop();
-           parts.pop();        
-         } 
-       }
-       orders.get(i).display();
-    }    
- }
+  }
+}
+void orderCheck(float x, float y) {
+  if (isWithin(x, 692, 792, y, 628, 728)) {
+    if (cursorValue >= 30 && cursorValue < 36) {
+      Food temp = new Food(menu[cursorValue - 30].type);
+      combineOrder.add(temp);
+      cursorValue = 40;
+    }
+  }
 }
 
 
@@ -210,7 +243,7 @@ void juicerCheck(float x, float y) {
           Ingredients temp = ingredient[1][cursorValue - 5];
           Ingredients storedFood = new Ingredients(temp.type, juicer[r][c].xPos + 25, juicer[r][c].yPos + 25, temp.img);
           juicer[r][c].currFood = storedFood;
-        } else if (cursorValue == 30 && juicer[r][c].currFood.isCooked == true) {
+        } else if (cursorValue == 40 && juicer[r][c].inUse == true && juicer[r][c].currFood.isCooked == true) {
           Ingredients currFood = juicer[r][c].currFood;
           if (currFood.type.equals("apple")) {
             cursorValue = 18;
@@ -222,12 +255,6 @@ void juicerCheck(float x, float y) {
         }
       }
     }
-  }
-}
-
-void customerCheck(float x, float y) { 
-  if (isWithin(x, 50, 100, y, 450, 550) ) {
-    customerList.peek().printOrder();
   }
 }
 
@@ -267,6 +294,9 @@ void drawCursor() {
     temp = getIngredient().img;
     image(temp, xPos - 15, yPos - 15, 30, 30);
     text("burned", xPos - 15, yPos - 30, 60, 30);
+  } else if (cursorValue < 36) {
+    temp = menu[cursorValue - 30].img;
+    image(temp, xPos - 15, yPos -15, 30, 30);
   }
 }
 
@@ -366,27 +396,67 @@ void drawStoves() {
   }
 }
 
-void drawTrash() { 
-  PImage img = loadImage("Image/trash.png");
-  image(img, 692, 514, 100, 100);
+void displayItem() {
+  int y = 594;
+  for (Ingredients i : makeOrder) {
+    text(i.type, 806, y, 100, 20);
+    y -= 20;
+  }
+}
+
+void displayOrder() {
+  int y = 708;
+  for (Food f : combineOrder) {
+    text(f.type, 806, y, 100, 20);
+    y -= 20;
+  }
 }
 
 void drawTray() {
-  PImage img = loadImage("Image/tray.jpg");
+  PImage img = loadImage("Image/tray.png");
+  noFill();
+  stroke(0);
+  rect(692, 514, 100, 100);
+  image(img, 692, 514, 100, 100);
+  rect(692, 628, 100, 100);  
   image(img, 692, 628, 100, 100);
 }
 
-//if the order is burnt or does not match the order, remove the order and remake
-void trash() {
-  if (isWithin(mouseX, 692, 792, mouseY, 514, 614))
-    cursorValue = 30;
+void drawServe() {
+  PImage img = loadImage("Image/service.png");
+  noFill();
+  stroke(0);
+  rect(920, 514, 100, 100);
+  image(img, 920, 514, 100, 100);
 }
 
-void makeTray() {
-  if (isWithin(mouseX, 692, 792, mouseY, 628, 728) ) {
-    if (cursorValue < 10) 
-      getIngredient().display();
+void serviceCheck(float x, float y) {
+  if (isWithin(x, 920, 1020, y, 514, 614) && cursorValue == 40 && !(combineOrder.isEmpty())) {
+    for (int i = 0; i < customerList.peek().orderList.size(); i++) {
+      if (customerList.peek().orderList.size() == combineOrder.size()) {
+        if (!(customerList.peek().orderList.get(i).type.equals(combineOrder.get(i).type))) {
+          break;
+        }
+        customerList.remove();
+        LinkedList temp = new LinkedList();
+        combineOrder = temp;
+      }
+    }
   }
+}
+
+//if the order is burnt or does not match the order, remove the order and remake
+void trash(float x, float y) {
+  if (isWithin(x, 920, 1020, y, 628, 728))
+    cursorValue = 40;
+}
+
+void drawTrash() { 
+  PImage img = loadImage("Image/trash.png");
+  noFill();
+  stroke(0);
+  rect(920, 628, 100, 100);
+  image(img, 920, 628, 100, 100);
 }
 
 //spawn the customers
@@ -408,14 +478,5 @@ void come() {
   for (Customer c : customerList) {
     c.setPOrder(y);
     y-= 100;
-  }
-}
-
-void leave() {
-  Customer c = customerList.peek();
-  if (c.waitTime < 0) {
-    
-    text(c.comment, c.xPos + 50, c.yPos + 20);
-    customerList.remove();
   }
 }
