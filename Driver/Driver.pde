@@ -55,6 +55,7 @@ void mousePressed() {
   ingredientCheck(mouseX, mouseY);
   stoveCheck(mouseX, mouseY);
   juicerCheck(mouseX, mouseY);
+  trayCheck(mouseX,mouseY);
   trash();
   makeTray();
 }
@@ -169,13 +170,16 @@ void stoveCheck(float x, float y) {
 
 
 void trayCheck(float x, float y) {
- if(isWithin(mouseX, 692, 792, mouseY, 628, 728) ) {
+ if(isWithin(x, 692, 792, y, 628, 728) ) {
    //for the food you put in tray
    boolean correctI = true;
    Stack<Ingredients> parts = new Stack<Ingredients>();
-    if (cursorValue >= 10) {
-      parts.push(ingredient[1][cursorValue - 10]);
+    if (cursorValue >= 10 && cursorValue <20) {
+      parts.push(ingredient[0][cursorValue - 10]);
     }  
+    if(cursorValue >= 5 && cursorValue < 10)  {
+      parts.push(ingredient[1][cursorValue - 5]);
+    }
     ArrayList<Food> orders = customerList.peek().getOrder(); //get orders of the first customer 
     Stack<Ingredients> iCheck; //stack of default ingredients for each order
     //for each orders of the first customer
@@ -188,10 +192,12 @@ void trayCheck(float x, float y) {
            iCheck.pop();
            parts.pop();        
          } 
-       }              
+       }
+       orders.get(i).display();
     }    
  }
 }
+
 
 //check if the ingredients cursor is within the region of the juicer
 //if it is within the region, then store the juicer as an used Juicer, meaning it cannot be occupied until the ingredients is ready
@@ -408,6 +414,7 @@ void come() {
 void leave() {
   Customer c = customerList.peek();
   if (c.waitTime < 0) {
+    
     text(c.comment, c.xPos + 50, c.yPos + 20);
     customerList.remove();
   }
