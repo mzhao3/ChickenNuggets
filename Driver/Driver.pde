@@ -4,7 +4,7 @@ import java.util.LinkedList;
 //instance variables 
 Food[] menu;
 PriorityQueue<Customer> customerList;
-ArrayList<Ingredients> makeOrder; //stack of orders
+ArrayList<Ingredients> makeOrder; //arrayList of orders
 LinkedList<Food> combineOrder;
 Ingredients[][] ingredient;
 Stove[][] stove;
@@ -70,6 +70,7 @@ void mousePressed() {
   trash(mouseX, mouseY);
 }
 
+//specify location of the menu
 void populateMenu() {
   menu[0] = new Food("hamburger");
   menu[1] = new Food("chickenburger");
@@ -125,6 +126,9 @@ void stoveCook() {
   }
 }
 
+
+//check if the mouse is within the region of the juicer
+//if the juiver is not being used then tell Juicer to store the new cursor as its currFood
 void juiceCook() { 
   for (int r = 0; r < 2; r ++ ) {
     for (int c = 0; c < 1; c ++) {
@@ -187,6 +191,9 @@ void stoveCheck(float x, float y) {
   }
 }
 
+//add items to the ArrayList of prepared Food based on their cursor value
+//check if the added item matched the default way of making in Food
+//if everything matched, store the order
 void itemCheck(float x, float y) {
   if (isWithin(x, 692, 792, y, 514, 614) ) {
     //for the food you put in tray
@@ -225,6 +232,9 @@ void itemCheck(float x, float y) {
     }
   }
 }
+
+//after making the order in itemCheck
+//combine all the makeOrder into a list of orders that the user made
 void orderCheck(float x, float y) {
   if (isWithin(x, 692, 792, y, 628, 728)) {
     if (mouseButton == RIGHT && !(combineOrder.isEmpty())) {
@@ -404,6 +414,8 @@ void drawStoves() {
   }
 }
 
+
+//display the final product once the food is cooked
 void displayItem() {
   int y = 594;
   for (Ingredients i : makeOrder) {
@@ -412,6 +424,7 @@ void displayItem() {
   }
 }
 
+//
 void displayOrder() {
   int y = 708;
   for (Food f : combineOrder) {
@@ -420,6 +433,7 @@ void displayOrder() {
   }
 }
 
+//create two tray icons
 void drawTray() {
   PImage img = loadImage("Image/tray.png");
   noFill();
@@ -430,6 +444,7 @@ void drawTray() {
   image(img, 692, 628, 100, 100);
 }
 
+//draw the service table
 void drawServe() {
   PImage img = loadImage("Image/service.png");
   noFill();
@@ -438,6 +453,7 @@ void drawServe() {
   image(img, 920, 514, 100, 100);
 }
 
+//check whether the food made in orderCheck matched the desired orders in orderList
 void serviceCheck(float x, float y) {
   if (isWithin(x, 920, 1020, y, 514, 614) && cursorValue == 40 && !(combineOrder.isEmpty())) {
     for (int i = 0; i < customerList.peek().orderList.size(); i++) {
@@ -459,6 +475,8 @@ void trash(float x, float y) {
     cursorValue = 40;
 }
 
+
+//create the trash icon
 void drawTrash() { 
   PImage img = loadImage("Image/trash.png");
   noFill();

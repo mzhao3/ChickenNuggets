@@ -54,6 +54,7 @@ class Food {
     }
   }
 
+  //display the food item
   void display() {
     image(img, xPos, yPos, 100, 100);
   }

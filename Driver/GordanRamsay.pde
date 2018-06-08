@@ -9,6 +9,7 @@ class GordanRamsay extends Customer{
     isLeaving = false; 
   }
   
+  //once FOod is done, Gordon will flame
   String comment() {
     int random = (int)(Math.random() * 3);
     if (random == 0) {
