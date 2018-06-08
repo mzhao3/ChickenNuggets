@@ -223,9 +223,9 @@ void itemCheck(float x, float y) {
               ArrayList temp = new ArrayList();
               makeOrder = temp;
             }
-            if (makeOrder.isEmpty()) {
-              break;
-            }
+          }
+          if (makeOrder.isEmpty()) {
+            break;
           }
         }
       }

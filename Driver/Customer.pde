@@ -20,8 +20,6 @@ class Customer implements Comparable<Customer>{
     orderList = makeOrder((int)(Math.random() * 3));
   }
   
-  
-  
 //-------------PQueue--Helper----------------
   boolean equals(Customer other) {
     return priority == other.priority;
@@ -55,8 +53,6 @@ class Customer implements Comparable<Customer>{
     }
     return typeList;
   }
-
-
   
     //display the name of each food in the orderList
   String printOrder() {
