@@ -9,7 +9,7 @@ Ingredients[][] ingredient;
 Stove[][] stove;
 Juicer[][] juicer;
 float totalTips, xPos, yPos;
-int cursorValue = 20; //every ingredients icon on the screen are numbered 0-9 corresponding to the Ingredients object 
+int cursorValue = 30; //every ingredients icon on the screen are numbered 0-9 corresponding to the Ingredients object 
 int numLeave;
 
 //instantiate the instance variables
@@ -47,7 +47,6 @@ void draw() {
   stoveCook();
   juiceCook();
   come();
-  System.out.println(cursorValue);
 }
 
 //function called once after every time a mouse is pressed.
@@ -132,7 +131,7 @@ void stoveCheck(float x, float y) {
           Ingredients temp = ingredient[0][cursorValue];
           Ingredients storedFood = new Ingredients(temp.type, stove[r][c].xPos + 25, stove[r][c].yPos + 25, temp.img);
           stove[r][c].currFood = storedFood;
-        } else if (cursorValue == 20 && stove[r][c].currFood.isCooked == true) {
+        } else if (cursorValue == 30 && stove[r][c].currFood.isCooked == true) { //IT'S COOKED TO PERFECTION
           Ingredients currFood = stove[r][c].currFood;
           if (currFood.type.equals("cheese")) {
             cursorValue = 10;
@@ -144,6 +143,21 @@ void stoveCheck(float x, float y) {
             cursorValue = 13;
           } else if (currFood.type.equals("fish")) {
             cursorValue = 14;
+          }
+          stove[r][c].currFood = null;
+          stove[r][c].inUse = false;
+        } else if (cursorValue == 30 && stove[r][c].currFood.isBurned == true) { //"IT'S BLOODY RAW"
+          Ingredients currFood = stove[r][c].currFood;
+          if (currFood.type.equals("cheese")) {
+            cursorValue = 20;
+          } else if (currFood.type.equals("chicken")) {
+            cursorValue = 21;
+          } else if (currFood.type.equals("beef")) {
+            cursorValue = 22;
+          } else if (currFood.type.equals("bacon")) {
+            cursorValue = 23;
+          } else if (currFood.type.equals("fish")) {
+            cursorValue = 24;
           }
           stove[r][c].currFood = null;
           stove[r][c].inUse = false;
@@ -159,18 +173,24 @@ void juicerCheck(float x, float y) {
   for (int r = 0; r < 2; r ++ ) {
     for (int c = 0; c < 1; c ++) {
       if (isWithin(x, juicer[r][c].xPos, juicer[r][c].xPos + 100, y, juicer[r][c].yPos, juicer[r][c].yPos + 100) ) {
-        if (cursorValue > 7 && cursorValue < 10) {
+        if (cursorValue > 7 && cursorValue < 10 && juicer[r][c].inUse == false) {
           juicer[r][c].inUse = true;
           Ingredients temp = ingredient[1][cursorValue - 5];
           Ingredients storedFood = new Ingredients(temp.type, juicer[r][c].xPos + 25, juicer[r][c].yPos + 25, temp.img);
           juicer[r][c].currFood = storedFood;
-        } else if (cursorValue == 20 && juicer[r][c].currFood.isCooked == true) {
-          Ingredients currFood = stove[r][c].currFood;
+        } else if (cursorValue == 30 && juicer[r][c].currFood.isCooked == true) {
+          Ingredients currFood = juicer[r][c].currFood;
+          if (currFood.type.equals("apple")) {
+            cursorValue = 18;
+          } else if (currFood.type.equals("orange")) {
+            cursorValue = 19;
+          }
+          juicer[r][c].currFood = null;
+          juicer[r][c].inUse = false;
         }
       }
     }
   }
-}
 }
 
 void customerCheck(float x, float y) { 
@@ -201,12 +221,20 @@ void drawCursor() {
       text("uncooked", xPos - 30, yPos - 30, 60, 30);
     }
     if (cursorValue > 7 && cursorValue < 10) {
-      text("whole", xPos - 15, yPos - 30, 40, 30);
+      text("whole", xPos - 15, yPos - 30, 60, 30);
     }
   } else if (cursorValue < 15) {
     temp = getIngredient().img;
     image(temp, xPos - 15, yPos - 15, 30, 30);
     text("cooked", xPos - 20, yPos - 30, 60, 30);
+  } else if (cursorValue > 17 && cursorValue < 20) {
+    temp = getIngredient().img;
+    image(temp, xPos - 15, yPos - 15, 30, 30);
+    text("juice", xPos - 10, yPos - 30, 60, 30);
+  } else if (cursorValue < 25) {
+    temp = getIngredient().img;
+    image(temp, xPos - 15, yPos - 15, 30, 30);
+    text("burned", xPos - 15, yPos - 30, 60, 30);
   }
 }
 
@@ -220,6 +248,10 @@ Ingredients getIngredient() {
     return ingredient[1][cursorValue - 5];
   } else if (cursorValue < 15) {
     return ingredient[0][cursorValue - 10];
+  } else if (cursorValue > 17 && cursorValue < 20) {
+    return ingredient[1][cursorValue - 15];
+  } else if (cursorValue < 25) {
+    return ingredient[0][cursorValue - 20];
   } else {
     return null;
   }
@@ -315,7 +347,7 @@ void drawTray() {
 //if the order is burnt or does not match the order, remove the order and remake
 void trash() {
   if (isWithin(mouseX, 692, 792, mouseY, 514, 614))
-    cursorValue = 20;
+    cursorValue = 30;
 }
 
 void makeTray() {
