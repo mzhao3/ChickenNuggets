@@ -190,31 +190,35 @@ void stoveCheck(float x, float y) {
 void itemCheck(float x, float y) {
   if (isWithin(x, 692, 792, y, 514, 614) ) {
     //for the food you put in tray
-    if (cursorValue >= 5 && cursorValue < 8) {
-      Ingredients temp = new Ingredients(ingredient[1][cursorValue - 5].type);
-      makeOrder.add(temp);
-      cursorValue = 40;
-    } else if (cursorValue >= 10 && cursorValue < 15) {
-      Ingredients temp = new Ingredients(ingredient[0][cursorValue - 10].type);
-      makeOrder.add(temp);
-      cursorValue = 40;
-    } else if (cursorValue > 17 && cursorValue < 20) {
-      Ingredients temp = new Ingredients(ingredient[1][cursorValue - 15].type);
-      makeOrder.add(temp);
-      cursorValue = 40;
-    } else if (cursorValue == 40 && !(makeOrder.isEmpty())) {
-      for (int i = 0; i < menu.length; i++) {
-        for (int j = 0; j < menu[i].components.size(); j++) {
-          if (makeOrder.size() == menu[i].components.size()) {
-            if (!(makeOrder.get(j).type.equals(menu[i].components.get(j).type))) {
+    if (mouseButton == RIGHT && !(makeOrder.isEmpty())) {
+      makeOrder.remove(makeOrder.size() - 1);
+    } else {
+      if (cursorValue >= 5 && cursorValue < 8) {
+        Ingredients temp = new Ingredients(ingredient[1][cursorValue - 5].type);
+        makeOrder.add(temp);
+        cursorValue = 40;
+      } else if (cursorValue >= 10 && cursorValue < 15) {
+        Ingredients temp = new Ingredients(ingredient[0][cursorValue - 10].type);
+        makeOrder.add(temp);
+        cursorValue = 40;
+      } else if (cursorValue > 17 && cursorValue < 20) {
+        Ingredients temp = new Ingredients(ingredient[1][cursorValue - 15].type);
+        makeOrder.add(temp);
+        cursorValue = 40;
+      } else if (cursorValue == 40 && !(makeOrder.isEmpty())) {
+        for (int i = 0; i < menu.length; i++) {
+          for (int j = 0; j < menu[i].components.size(); j++) {
+            if (makeOrder.size() == menu[i].components.size()) {
+              if (!(makeOrder.get(j).type.equals(menu[i].components.get(j).type))) {
+                break;
+              }
+              cursorValue = i + 30;
+              ArrayList temp = new ArrayList();
+              makeOrder = temp;
+            }
+            if (makeOrder.isEmpty()) {
               break;
             }
-            cursorValue = i + 30;
-            ArrayList temp = new ArrayList();
-            makeOrder = temp;
-          }
-          if (makeOrder.isEmpty()) {
-            break;
           }
         }
       }
@@ -223,10 +227,14 @@ void itemCheck(float x, float y) {
 }
 void orderCheck(float x, float y) {
   if (isWithin(x, 692, 792, y, 628, 728)) {
-    if (cursorValue >= 30 && cursorValue < 36) {
-      Food temp = new Food(menu[cursorValue - 30].type);
-      combineOrder.add(temp);
-      cursorValue = 40;
+    if (mouseButton == RIGHT && !(combineOrder.isEmpty())) {
+      combineOrder.remove(combineOrder.size() - 1);
+    } else {
+      if (cursorValue >= 30 && cursorValue < 36) {
+        Food temp = new Food(menu[cursorValue - 30].type);
+        combineOrder.add(temp);
+        cursorValue = 40;
+      }
     }
   }
 }
