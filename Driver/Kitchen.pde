@@ -13,7 +13,7 @@ class Kitchen {
   //timer
   int makeFood() {
     currFood.cookTime = currFood.cookTime -=1;
-    return (int) (currFood.cookTime / 60);
+    return (int) (currFood.cookTime / 60) + 1;
   }
   
   //create white space / room to contain kitchen item
