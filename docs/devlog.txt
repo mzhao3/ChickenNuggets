@@ -9,7 +9,8 @@ Project:
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+- A lot of our code has independent processes, but we were able to cobble it together into one cohesive program.
+- Clicking! Clicking was one of the most time consuming aspects because we were unsure of how to "send" an object between the inventory of foods, the kitchen equipment, and the final serving tray. 
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -17,16 +18,19 @@ UNRESOLVED ISSUES
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- If your computer does have autosaves, and you forget to save your work, you can change the file extension from .autosave to .pde, and your computer can open it.
 
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- discarding our proposal to implement Java first then processing. We are starting with Processing. This decision is made because majority of our group voted for this option and we all think this is the best choice to present our final products within the time constraints.
+- We discarded our proposal to implement Java first then processing. We are starting with Processing. This decision is made because too much of the game functionality, like choosing food to cook, and serving it, is too different in Java and Processing, and having it in Java first wouldn’t really be helpful to the development process. We believe that this is the best choice to present our final products within the time constraints.
 
+- We first decided not to make a separate storeUI, and keep all of the upgrade/buy buttons next to the piece of kitchen equipment for convenience. We then decided not to implement store because there were already too many clickable objects on the screen. 
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+- Processing might say that it autosaves, but it doesn't always. Remember to Ctrl-C.
+- Communication is key!
 
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -84,3 +88,11 @@ Maggie: Started on storeUI and button writing
 --------------------------------------------------------------
 Maggie: updated README.md with user instructions and explanation; updated plan for 2018-06-06
 
+2018-06-06
+--------------------------------------------------------------
+Maggie: updated README.md to explain "how your project works"
+
+2018-06-07
+--------------------------------------------------------------
+Everyone: had a collective early-life crisis. 
+Maggie: scrapped StoreUI, wrote methods for trashing, cooking/juicing
