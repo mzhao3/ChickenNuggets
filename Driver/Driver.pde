@@ -167,6 +167,32 @@ void stoveCheck(float x, float y) {
   }
 }
 
+
+void trayCheck(float x, float y) {
+ if(isWithin(mouseX, 692, 792, mouseY, 628, 728) ) {
+   //for the food you put in tray
+   boolean correctI = true;
+   Stack<Ingredients> parts = new Stack<Ingredients>();
+    if (cursorValue >= 10) {
+      parts.push(ingredient[1][cursorValue - 10]);
+    }  
+    ArrayList<Food> orders = customerList.peek().getOrder(); //get orders of the first customer 
+    Stack<Ingredients> iCheck; //stack of default ingredients for each order
+    //for each orders of the first customer
+    for(int i = 0; i < orders.size(); i++) {
+       iCheck = orders.get(i).getComponents();  //check the ingredients of the first order  
+       for(int j = 0; j < iCheck.size(); j++) {
+         //if the two components (customers and default are equal)
+         if(parts.peek().equals(iCheck.peek())) {
+           correctI = true;
+           iCheck.pop();
+           parts.pop();        
+         } 
+       }              
+    }    
+ }
+}
+
 //check if the ingredients cursor is within the region of the juicer
 //if it is within the region, then store the juicer as an used Juicer, meaning it cannot be occupied until the ingredients is ready
 void juicerCheck(float x, float y) { 

@@ -51,6 +51,13 @@ class Food {
     }
   }
 
+  Stack<Ingredients> getComponents() {
+    Stack<Ingredients> result = new Stack<Ingredients>();
+    for(int i = 0; i < components.size(); i++) {
+      result.push(components.peek());
+    }
+    return result;   
+  }
   //return name of food
   String getType() {
     return type;

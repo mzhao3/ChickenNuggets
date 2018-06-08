@@ -52,13 +52,15 @@ class Customer implements Comparable<Customer>{
   }
   
    //return the name of each food in the orderList
-  ArrayList<String> getOrder() {
-    ArrayList<String> typeList = new ArrayList<String>();
+ ArrayList<Food> getOrder() {
+    ArrayList<Food> typeList = new ArrayList<Food>();
     for(Food order: orderList) {
-      typeList.add(order.getType());
+      typeList.add(order);
     }
     return typeList;
   }
+
+
   
     //display the name of each food in the orderList
   String printOrder() {
