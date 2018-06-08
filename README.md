@@ -45,7 +45,7 @@ Good question my dear thinker!
 * Orders are created with stacks. One order is created by the customer. The other is made by the player (by clicking food items onto the tray). When your food is ready to be served, click on the tray, and then the customer, which then pops off each Food item of the order, and compares its ingredients.
 
 * Clicking! Clicking on any of the food items displayed on the screen causes the image to follow the cursor around. 
-- When placed on a stove or a juicer, it creates a new object of that Ingredient type. It also displays the image of the food over the piece of kitchen equipment.
+  - When placed on a stove or a juicer, it creates a new object of that Ingredient type. It also displays the image of the food over the piece of kitchen equipment.
   - When placed in the trash can, it simply removes the image from the cursor.
   - When you place the food item on the tray, it constantly checks if what you have matches a preset food item (like hamburger, salad, or orangejuice). You then click on the customer to give them their order.
 This is all accomplished by creating several "modes", which change when clicking on food items, kitchen equipement, or customers.
