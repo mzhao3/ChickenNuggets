@@ -7,6 +7,9 @@ pd 1
 Project: 
 /////////// Zone of Reflection \\\\\\\\\\\
 ------------------------------------------
+Project Summary:
+Simulation of Papa's Pizzeria.
+------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - A lot of our code has independent processes, but we were able to cobble it together into one cohesive program.
@@ -14,7 +17,7 @@ OBSTACLES OVERCOME
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+- game is incredibly slow
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
